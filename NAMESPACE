@@ -1,4 +1,4 @@
-import(amap,agricolae,agridat,corrgram,dplyr,genetics,GeneticsPed,ggplot2,gplots,grid,MASS,MCMCglmm,reshape2,sqldf)
+import(amap,agricolae,agridat,corrgram,genetics,GeneticsPed,ggplot2,gplots,grid,MASS,MCMCglmm,reshape2,sqldf,dplyr)
 export(asreml.batch)
 export(dial.combn)
 export(depack)
