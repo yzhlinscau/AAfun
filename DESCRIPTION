@@ -17,6 +17,7 @@ Imports:
     GeneticsPed,
     ggplot2,
     gplots,
+    grid,
     MASS,
     MCMCglmm,
     reshape2,
