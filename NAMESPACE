@@ -1,4 +1,4 @@
-import(amap,agricolae,agridat,corrgram,genetics,GeneticsPed,gplots,grid,MASS,MCMCglmm,plyr,reshape2,sqldf)
+import(amap,agricolae,agridat,corrgram,dplyr,genetics,GeneticsPed,ggplot2,gplots,grid,MASS,MCMCglmm,plyr,reshape2,sqldf)
 export(asreml.batch)
 export(dial.combn)
 export(depack)
@@ -27,4 +27,3 @@ export(spd.plot)
 export(sig.level)
 export(sig.level2)
 export(snp.batch)
-
