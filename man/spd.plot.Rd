@@ -89,7 +89,7 @@ data(ir.sp)
 ir.sp2<-ir.sp[,5:16] # order: Row,Col,h05,cw05,...
 #ir.sp2<-subset(ir.sp,select=c(Row,Col,h05,cw05))
 
-sp1<-ir2r.sp(ir.sp2,ir.sp2$Row,ir.sp2$Col,row.max=10,col.max=20)
+sp1<-ir2r.sp(ir.sp2,row.max=10,col.max=20)
 
 aim.trait=subset(sp1,select=c(Row,Col,d10))
 spd.plot(aim.trait,key.unit="cm")
