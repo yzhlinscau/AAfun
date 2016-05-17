@@ -16,7 +16,7 @@ function(object,type="data",p.lbls=NULL,key.unit=NULL,
   lbls<-names(object[3])
   lbls2<-paste(lbls,key.unit,sep="\n(")
   lbls2<-paste(lbls2,"",sep=")")
-  object.1<-(object[,3])
+  object.1<-as.vector(object[,3])
   df <-matrix(object.1,nrow=ncol,byrow=TRUE)
   if(is.null(na)) na=1
   if(na==0)  df[is.na(df)]<-0.0001  # reduce effects of NA value in data 
