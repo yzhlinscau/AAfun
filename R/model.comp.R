@@ -46,8 +46,8 @@ function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
     cat("-----------------------------\n")
     cat("Lower AIC and BIC is better model.\n\n")
     
-    A<-combn(1:Nmls,2)
-    B<-Nmls*(Nmls-1)/2
+    LA<-combn(1:Nmls,2)
+    LB<-Nmls*(Nmls-1)/2
     
     if(LRT==TRUE){
       cat("\n\n")
@@ -56,8 +56,8 @@ function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
       cat("In the present, just allow one object's length < 43.")
       cat("\n=====================================")
       cat("\nLikelihood ratio test (LRT) results:\n\n")
-      for(i in 1:B){
-        if(B>1)df1<-df[A[,i],1:4] else df1<-df[1:2,1:4]
+      for(i in 1:LB){
+        if(LB>1)df1<-df[LA[,i],1:4] else df1<-df[1:2,1:4]
         df1<-arrange(df1,df1$Npm)
         DlogL=df1$LogL[2]-df1$LogL[1]
         Ddf=df1$Npm[2]-df1$Npm[1]
