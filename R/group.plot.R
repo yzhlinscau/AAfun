@@ -1,6 +1,6 @@
 group.plot <-
-function(object,x.lbls,y.lbls=NULL,y.zero=NULL, ...){
-   par(mar=c(5,6.5,4,2))
+function(object,x.lbls,y.lbls=NULL,y.zero=NULL,alpha=0.05, ...){
+   #par(mar=c(5,6.5,4,2))
    
    #require(agricolae)
    #require(gplots)
@@ -11,10 +11,11 @@ function(object,x.lbls,y.lbls=NULL,y.zero=NULL, ...){
    object$groups2<-arrange(object$groups,object$groups$trt)
    lbls<-object$groups2[,3]
    #lbls<-toupper(lbls) # tolower()
-   if(is.null(y.lbls)) y.lbls<-names(object$means[1])   
+   if(is.null(y.lbls)) y.lbls<-names(object$means[1])  
+   df=sum(object$means[,3])-1
    
    mu.i <- object$means[,1]
-   se.i <- qt(1-0.05/2, 45) * object$means[,2] 
+   se.i <- qt(1-0.5*alpha, df) * object$means[,2] 
    
    #if(y.zero==TRUE) y.min<- ifelse(min(mu.i-se.i)>10,(min(mu.i-se.i)-5),0)
    #if(y.zero==FALSE) y.min=0
