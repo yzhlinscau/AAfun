@@ -9,7 +9,8 @@ function(object,plot.title=NULL,...){
   levels(dat[,3])<-paste("S",1:nlevels(dat[,3]),sep="")
   names(dat)[1:5]<-c("genotype","yield","site","row","col")
   for(i in 4:5){dat[,i]<-as.numeric(dat[,i])}
-  windows(10,8)
+  
+  #windows(10,8)
   # desplot(yield~ col*row|site, dat, main=plot.title)
   if(length(dat)==5){  
     desplot(yield~ col*row|site, dat, main=plot.title)
