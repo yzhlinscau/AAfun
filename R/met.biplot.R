@@ -7,7 +7,7 @@ met.biplot <-
     
     fa.name<-paste("FA",1:faN,sep="")
     dimnames(Xfam)<-list(paste("S",1:siteN,sep=""),c("Psi",fa.name))
-    windows(8,8)
+    #windows(8,8)
     pairs(Xfam,main="Fig 1 pairs of Psi with FAs")
     
     ss<-svd(Xfam[,-1])
@@ -43,7 +43,7 @@ met.biplot <-
       
       if(faN>2){
         for(i in 1:bl){
-          windows(18,8)
+          #windows(18,8)
           par(mfrow=c(1,2))
           biplot(scores[,acb[,i]],Lam[,acb[,i]],cex=0.75,
                  main=paste("Fig 2-",i, " biplot with all variety",sep=""))
@@ -54,7 +54,7 @@ met.biplot <-
           abline(v=0,lty=3)        
         }
       }else {
-        windows(18,8)
+        #windows(18,8)
         par(mfrow=c(1,2))
         biplot(scores[,1:2],Lam[,1:2],cex=0.75,
                main="Fig 2 biplot with all variety")
