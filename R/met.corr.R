@@ -35,17 +35,20 @@ function(object,site,kn=NULL){
   colnames(df)<-c(paste("S",levels(site),sep=''))  
   
   chcluster <- hclusterpar(na.omit(df), method="manhattan")
-  windows(10,8)
+  #windows(10,8)
   plot(chcluster, main="Fig.1 Cluster of different sites",hang=-1)  #  labels=F
   rect.hclust(chcluster, k=kn)
   cat("Site cluster results:\n")
   print(tree.id<-cutree(chcluster,k=kn))
   
-  if(n<16){
-    windows(10,8)
+  if(n<=16){
+    #windows(10,8)
     corrgram(df, type="cor",order=T, lower.panel=panel.pie,
                upper.panel=panel.conf, text.panel=panel.txt,
                main="Fig.2 Correlogram of different sites")
+  }
+  if(n>16){
+   cat("\nSince too many variables, the corrgram do not work.\n")
   }
   
   cat("\nCov\\Var\\Corr matrix\n\n")
