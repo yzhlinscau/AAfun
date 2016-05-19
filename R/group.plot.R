@@ -24,7 +24,7 @@ function(object,x.lbls,y.lbls=NULL,y.zero=NULL,alpha=0.05, ...){
    y.max<-max(mu.i+se.i)+10
    y.max2<- mu.i + se.i +2
    
-   windows(10,8)
+   #windows(10,8)
    bp <- barplot2(mu.i, names.arg=rownames(object$means),  
                   ylab=list(y.lbls, cex=1.5,font=2),xpd=FALSE,                  
                   ylim=c(min(y.min),y.max),density=10,font=2, col="red",
