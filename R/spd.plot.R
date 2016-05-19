@@ -49,7 +49,8 @@ function(object,type="data",p.lbls=NULL,key.unit=NULL,
   
   if(is.null(p.lbls)) p.lbls=" " else p.lbls=paste(": ",p.lbls)
   if(is.null(key.unit)) lbls2=lbls else lbls2=lbls2
-  windows(10,8)
+  
+  #windows(10,8)
   filled.contour(x, y, df, color.palette=color.p, 
                  plot.title = title( main=paste("The Topography of ",lbls, p.lbls), 
                                      xlab="Col", ylab="Row"), 
@@ -61,5 +62,4 @@ function(object,type="data",p.lbls=NULL,key.unit=NULL,
   )
   #abline(v=0, h=seq(1, max(y), by=1),lty=2,col="grey75") 
   #abline(h=0, v=seq(1, max(x), by=1),lty=2,col="gray75")
-  
 }
