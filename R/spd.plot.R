@@ -8,7 +8,8 @@ function(object,type="data",p.lbls=NULL,key.unit=NULL,
   
   if(type=="data"){
     for(i in 1:2){object[,i]<-as.numeric(object[,i])}
-    object<-arrange(object,object[2],object[1])
+    #object<-arrange(object,object[2],object[1])
+    object<-object[order(object[2],object[1]),]
   }
   if(type=="variogram"){object=object[,-4];for(i in 1:2) object[,i]=object[,i]+1} 
   
