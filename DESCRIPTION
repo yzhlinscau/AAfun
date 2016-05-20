@@ -19,7 +19,9 @@ Imports:
     gplots,
     grid,
     MASS,
+    Matrix,
     MCMCglmm,
+    nadiv,
     reshape2,
     sqldf
 License: GPL-3
