@@ -7,5 +7,6 @@ function(ped){
   ped1<-data.frame(p1,p2=0,p3=0)
   names(ped1)<-names(ped)
   ped2<-rbind(ped1,ped)
+  ped2[is.na(ped2)]=0
   ped2   
 }
