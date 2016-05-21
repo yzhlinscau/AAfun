@@ -1,5 +1,5 @@
 snp.batch <- function (data,SNP.N,traitN,FMod=NULL,maxit=NULL,SNP.detail=FALSE,
-                       SNP.figure=FALSE){
+                       SNP.figure=FALSE,SNP.signif=TRUE,alpha=0.05){
   options(digits=3)
   
   ## theme for ggplot
@@ -49,6 +49,10 @@ snp.batch <- function (data,SNP.N,traitN,FMod=NULL,maxit=NULL,SNP.detail=FALSE,
       if(SNP.figure==TRUE) print(ggfigure)
     }
     names(mm)=c("SNP","SNP.p","Sig.level")
+    
+    if(SNP.signif==TRUE) {
+      mm=subset(mm,SNP.p<=alpha)
+    } else {mm=mm}
     
     if(SNP.detail==FALSE) {tt[[i]]=list(Trait=NTrait[i],SNP.p=mm)} else{
       tt[[i]]=list(Trait=NTrait[i],SNP.p=mm,SNP.infor=SNP.infor)
