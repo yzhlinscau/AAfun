@@ -9,7 +9,7 @@ SNP batch analysis
 This function carries out batch analysis for SNP effects with trait in ASReml-R package.
 }
 \usage{
-snp.batch(data,SNP.N,traitN,FMod=NULL,maxit=NULL,SNP.detail=FALSE,SNP.figure=FALSE)
+snp.batch(data,SNP.N,traitN,FMod=NULL,maxit=NULL,SNP.detail=FALSE,SNP.figure=FALSE,SNP.signif=TRUE,alpha=0.05)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -33,6 +33,12 @@ Index to output information of every SNP type, F(default) for non-SNP-detail out
 }
   \item{SNP.figure}{
 Index to output boxplot of every SNP type, F(default) for non-figure output.
+}
+  \item{SNP.signif}{
+Index to output signif results of every SNP type, TRUE(default) for only significant output.
+}
+  \item{alpha}{
+Signif levels of every SNP type, 0.05(default).
 }
 }
 \author{
