@@ -8,7 +8,7 @@ function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
     cat("Attension:\n")
     cat("Fixed factors should be the same!\n\n\n")
     
-    Mnames<-NULL
+    Mnames=vector() #NULL
     Npm<-0
     if(mulM==TRUE){
       Nmls=ceiling(length(Nml)/43) # Nmls=(length(Nml)/43)
