@@ -1,7 +1,7 @@
 dial.combn <-
 function(lbls,N){
   n<-N  # dial mate number
-  t<-NULL
+  t=vector() #NULL
   if(n<10){ t<-paste(lbls,1:n,sep="")}
   if(n<100){ t[1:9]<-paste(lbls,1:9,sep="00")
              t[10:99]<-paste(lbls,10:99,sep="0")}  
