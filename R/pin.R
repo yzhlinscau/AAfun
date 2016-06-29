@@ -21,7 +21,7 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL){
     Vmat <- object$ai
     se <- sqrt(sum(Vmat * X[i] * X[j] * k))
     
-    vv<-NULL
+    vv=vector() #NULL
     vv[1]=tvalue;vv[2]=se
     
     result<-data.frame(row.names=tname, Estimate=tvalue, SE=se)
@@ -77,7 +77,7 @@ sig.level<-function(tvalue,se,...){
 }
 
 sig.level2=function(x){
-  tt=NULL
+  tt=vector() #NULL
   n=length(x)
   for(i in 1:n){
     if(abs(x[i])<0.001) tt[i]='***'
