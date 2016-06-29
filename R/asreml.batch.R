@@ -36,16 +36,16 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
   
   aa=factorN;cc=traitN
   aaN=length(aa);ccN=length(cc)
-  NTrait=pedinv=ginverse2=NULL
+  NTrait=pedinv=ginverse2=vector() #NULL
   
   fm <-list()
   mm1<-data.frame();mm2<-data.frame()
-  H2=RS=RS2=H2.se=NULL
-  Nvar=Nvar1=Nvar2=Nvar3=NULL
-  H3=H4=H5=H6=NULL
-  H3.se=H4.se=H5.se=H6.se=NULL
-  vv2=vv3=vv4=vv5=vv6=NULL
-  ARV=RV=RV.se=NULL
+  H2=RS=RS2=H2.se=vector() #NULL
+  Nvar=Nvar1=Nvar2=Nvar3=vector() #NULL
+  H3=H4=H5=H6=vector() #NULL
+  H3.se=H4.se=H5.se=H6.se=vector() #NULL
+  vv2=vv3=vv4=vv5=vv6=vector() #NULL
+  ARV=RV=RV.se=vector() #NULL
   
   if(mulT==FALSE){
     for(i in 1:ccN){
@@ -115,7 +115,7 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
     if((ccN/mulN)==1){bb=cc;bbn=1}
     if((ccN/mulN<1)){cat("\nThe trait No is less than in the model!\n");break}
     
-    vvN=NULL
+    vvN=vector() #NULL
     
     for(n in 1:bbn){
       if((ccN/mulN)>1) df1=data[,c(aa,bb[,n])] else df1=data[,c(aa,bb)]
