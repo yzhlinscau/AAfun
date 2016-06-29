@@ -19,7 +19,7 @@ snp.batch <- function (data,SNP.N,traitN,FMod=NULL,maxit=NULL,SNP.detail=FALSE,
   aaN=length(aa);ccN=length(cc)
   
   mm<-data.frame();tt=SNP.infor=list()
-  NTrait=N.Snp=SNP.p=NULL
+  NTrait=N.Snp=SNP.p=vector() #NULL
   
   for(i in 1:ccN){
     df1=data[,c(aa,cc[i])]
