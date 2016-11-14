@@ -33,14 +33,15 @@ The input data is a character with a total number for diallel mate.
 Yuanzhen Lin <yzhlinscau@163.com>
 }
 \references{
-Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
 }
 \seealso{
 Website for instant update: yzhlin-asreml.ys168.com
 }
 
 \examples{
-
+library(AAfun)
+  
 dial.combn("G",8)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
