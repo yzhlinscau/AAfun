@@ -39,7 +39,7 @@ G matrices for different methods,1(default) using frequencies,2 using regression
 }
 \references{
 1. VanRaden PM. Efficient methods to compute genomic predictions. J Dairy Sci,2008, 91: 4414-4423.
-2. Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+2. Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
 }
 \author{
 Yuanzhen Lin <yzhlinscau@163.com>
@@ -64,7 +64,7 @@ gpnames=attributes(gpedinv)$rowNames
 
 Ginv1=Ginv(marker.file=G.marker,ped.file=G.pedigree,aped.rowNames=gpnames,Goptions=1)
 
-gblup<-asreml(t1~1+Site,random=~ ped(ID),
+gblup<-asreml(t1~1+Site,random=~ giv(ID), ## ped(ID)
                ginverse=list(ID=Ginv1),data=G.data)
 
 summary(gblup)$varcomp
@@ -81,9 +81,11 @@ path="G:/Users/yzhlin/Desktop/GBLUP"
 Ginv1=Ginv(marker.file="Genotype.csv",ped.file="pedigree.csv",
                        aped.rowNames=apnames,path=path,Goptions=1)
 
-df.asr<-asreml(t1~1+Site,random=~ ped(ID),
+## GBLUP
+df.asr<-asreml(t1~1+Site,random=~ giv(ID),
                ginverse=list(ID=Ginv1),data=df)
 
+## ABLUP
 df2.asr<-asreml(t1~1+Site,random=~ ped(ID),
                ginverse=list(ID=apedinv),data=df)               
 
