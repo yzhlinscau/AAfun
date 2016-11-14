@@ -57,14 +57,14 @@ Parameters of the function filled.contour()
 Yuanzhen Lin <yzhlinscau@163.com>
 }
 \references{
-Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
 }
 \seealso{
 Website for instant update: yzhlin-asreml.ys168.com
 }
 
 \examples{
-
+library(AAfun)
 ######## example 1 plot regular spatial data
 data(barley)
 
@@ -74,7 +74,7 @@ spd.plot(aim.trait,color.p=topo.colors)
 spd.plot(aim.trait,key.unit="Kg")
 spd.plot(aim.trait,p.lbls="barley",x.unit=2,y.unit=1)
 
-#AR1×AR1
+#AR1×AR1 model to plot variogram
 barley1.asr<-asreml(yield~Variety, rcov =~ ar1(Row):ar1(Column), data=barley)
 
 summary(barley1.asr)$varcomp
