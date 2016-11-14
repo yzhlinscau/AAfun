@@ -42,15 +42,16 @@ Value TRUE to control Ddf minus 0.5, default FALSE for LRT with Ddf. If TRUE, Dd
 Yuanzhen Lin <yzhlinscau@163.com>
 }
 \references{
-Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
 }
 \seealso{
 Website for instant update: yzhlin-asreml.ys168.com
 }
 
 \examples{
-df<-PrSpa
 library(asreml)
+library(AAfun)
+df<-PrSpa
 
 fm<-asreml(h5~ 1+Rep,random=~ Fam, 
             subset=Spacing=='3',data=df,maxit=40)
