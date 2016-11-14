@@ -38,7 +38,7 @@ Least distance from center
 Yuanzhen Lin <yzhlinscau@163.com>
 }
 \references{
-Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
 }
 \seealso{
  \code{\link{met.plot}} 
@@ -47,6 +47,7 @@ Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China F
 
 \examples{
 library(asreml)
+library(AAfun)
 data(MET)
 
 MET$yield<-0.01*MET$yield
