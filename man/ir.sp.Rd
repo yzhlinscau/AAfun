@@ -31,7 +31,7 @@ An irregular spatial dataset example to be transformed to regular spatial data.
 }
 
 \references{
-Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
 }
 \examples{
 data(ir.sp)
