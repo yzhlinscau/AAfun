@@ -36,7 +36,7 @@ Site cluster group numbers
 Yuanzhen Lin <yzhlinscau@163.com>
 }
 \references{
-Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -47,11 +47,14 @@ Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China F
 }
 \examples{
 library(asreml)
+library(AAfun)
 data(MET)
 MET$yield<-0.01*MET$yield
+  
 met.asr<-asreml(yield~Loc, random=~ Genotype:fa(Loc,2), 
               rcov=~ at(Loc):ar1(Col):ar1(Row), 
               data=MET, maxiter=50)
+  
 met.corr(met.asr,MET$Loc,2)
 
 }
