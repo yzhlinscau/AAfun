@@ -24,7 +24,10 @@ A dataset of one plant in multi-environment trials(MET)
 }
 
 \references{
-Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
+}
+\seealso{
+Website for instant update: yzhlin-asreml.ys168.com
 }
 \examples{
 data(MET)
