@@ -38,6 +38,12 @@ An example dataset for GBLUP, cotaining id and SNPs.
     \item{\code{X3461}}{a numeric vector}
   }
 }
+\references{
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
+}
+\seealso{
+Website for instant update: yzhlin-asreml.ys168.com
+}
 
 \examples{
 data(G.marker)
