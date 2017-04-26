@@ -28,7 +28,10 @@ A dataset of spacing trials of Pinus radiata
 }
 
 \references{
-Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
+}
+\seealso{
+Website for instant update: yzhlin-asreml.ys168.com
 }
 \examples{
 data(PrSpa)
