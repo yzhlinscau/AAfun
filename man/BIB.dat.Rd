@@ -18,7 +18,7 @@
 }
 
 \references{
-Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+Yuanzhen Lin. R & ASReml-R Statistis. China Forestry Publishing House. 2016
 }
 \examples{
 data(BIB.dat)
