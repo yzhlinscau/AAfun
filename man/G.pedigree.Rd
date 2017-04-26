@@ -16,6 +16,12 @@ An example dataset for GBLUP, cotaining id, female and male.
     \item{\code{Male}}{a factor with levels \code{1} \code{3} \code{4} \code{9} \code{10} \code{12} \code{19} \code{20} \code{21} \code{25}}
   }
 }
+\references{
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
+}
+\seealso{
+Website for instant update: yzhlin-asreml.ys168.com
+}
 
 \examples{
 data(G.pedigree)
