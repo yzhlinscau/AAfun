@@ -19,22 +19,17 @@ Pedigree file from MCMCglmm's format data.
 }
 
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
   \item{ped }{Pedigree file with parents details}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
 }
 \author{
 Yuanzhen Lin <yzhlinscau@163.com>
 }
 \references{
-Yuanzhen Lin, Xiaoyang Chen. R & ASReml-R Statistical Analysis Tutorial. China Forestry Publishing House. 2014
+Yuanzhen Lin. R & ASReml-R Statistics. China Forestry Publishing House. 2016
 }
 \seealso{
 Website for instant update: yzhlin-asreml.ys168.com
 }
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \examples{
 data(PrSpa)
