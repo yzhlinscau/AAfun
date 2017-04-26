@@ -1,6 +1,7 @@
 Package: AAfun
 Title: ASReml-R Added functions
-Version: 2.6
+Version: 2.6.1-1
+Date: 2017-04-25
 Encoding: UTF-8
 Author: Yuanzhen Lin <yzhlinscau@163.com>
 Maintainer: Yuanzhen Lin <yzhlinscau@163.com>
