@@ -132,31 +132,41 @@ asreml.batch(data=df1,factorN=1:5,traitN=c(10:13),
              mulT=TRUE,mulN=3,mulR=TRUE,corM=TRUE)
 
 ##### example II for dataset with pedigree
-library(MCMCglmm)
+data(dfm2);df=dfm2
 
-data(BTdata) #names(BTdata);str(BTdata)
-data(BTped)  #names(BTped);head(BTped,3)
+ped<-df[,1:3]  
+pedinv<-asreml.Ainverse(ped)$ginv
+df1=subset(df,Spacing==3)
 
-BT.pedinv=asreml.Ainverse(BTped)$ginv
-
-# example 2.1 sigle trait model  
-asreml.batch(data=BTdata,factorN=c(3:5,7),traitN=c(1:2),
-              FMod=y~1+sex,RMod=~ped(animal),
-              ped=T,pedinv=BT.pedinv,ginverse=list(animal=BT.pedinv),
-              pformula=h2 ~  V1/(V1+V2))
+# example 2.1 sigle trait model
+asreml.batch(data=df1,factorN=1:6,traitN=c(7:14),
+             FMod=y~1+Rep,RMod=~ped(TreeID),
+             ped=T,pedinv=pedinv,                                   
+             ginverse=list(TreeID=pedinv),
+             pformula=h2 ~ V1/(V1+V2))
 
 
 # exmaple 2.2 us model 
-asreml.batch(data=BTdata,factorN=c(3:5,7),traitN=c(1:2),
-              FMod=cbind(y1,y2)~trait+trait:sex,RMod=~us(trait):ped(animal),
-              EMod=~units:diag(trait),mulT=TRUE,mulN=2,
-              ped=T,pedinv=BT.pedinv,ginverse=list(animal=BT.pedinv)) 
+asreml.batch(data=df1,factorN=1:6,traitN=c(10:14),
+                    FMod=cbind(y1,y2)~trait+trait:Rep,
+                    RMod=~us(trait):ped(TreeID),
+                    EMod=~units:us(trait),maxit=40,
+                    mulT=TRUE,mulN=2,mulR=TRUE,corMout=F,
+                    ped=T,pedinv=pedinv,
+                    ginverse=list(TreeID=pedinv),
+                    pformula=r.g ~ V2/sqrt(V1*V3),
+                    pformula1=h2.A ~ V1/(V1+V5),
+                    pformula2=h2.B ~ V3/(V3+V7))
+
 
 # exmaple 2.3  corr model
-asreml.batch(data=BTdata,factorN=c(3:5,7),traitN=c(1:2),
-              FMod=cbind(y1,y2)~trait+trait:sex,RMod=~corgh(trait):ped(animal),
-              EMod=~units:diag(trait),mulT=TRUE,mulN=2,corM=TRUE,
-              ped=T,pedinv=BT.pedinv,ginverse=list(animal=BT.pedinv))  
+asreml.batch(data=df1,factorN=1:6,traitN=c(10:14),
+             FMod=cbind(y1,y2)~trait+trait:Rep,
+             RMod=~corgh(trait):ped(TreeID),
+             EMod=~units:us(trait),maxit=40,
+             mulT=TRUE,mulN=2,corM=TRUE,
+             ped=T,pedinv=pedinv,
+             ginverse=list(TreeID=pedinv)) 
               
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
