@@ -275,6 +275,68 @@ relweights <- function(fit,...){
   return(import)
 }
  
+# ----------------------------------------------------------------------------
+# other functions for 5.8.1.3
+# ---------------------------------------------------------------------------- 
+cancor2 <- function(x, y, dec = 4){
+  x <- as.matrix(x); y <- as.matrix(y)
+  n<-dim(x)[1]; q1<-dim(x)[2]; q2<-dim(y)[2]; q<-min(q1,q2)
+  S11 <- cov(x); S12 <- cov(x, y); S21 <- t(S12); S22 <- cov(y)
+  E1 <- eigen(solve(S11)%*%S12%*%solve(S22)%*%S21)
+  E2 <- eigen(solve(S22)%*%S21%*%solve(S11)%*%S12)
+  rsquared <-E1$values[1:q] #as.real()
+  LR=pp=qq=tt <- NULL
+  for ( i in 1:q ){
+    LR <- c(LR, prod(1-rsquared[i:q]))
+    pp <- c(pp, q1-i+1)
+    qq <- c(qq, q2-i+1)
+    tt <- c(tt, n-1-i+1)}
+  m <- tt-0.5*(pp+qq+1); lambda <- (1/4)*(pp*qq-2); 
+  s <- sqrt((pp^2*qq^2-4)/(pp^2+qq^2-5))
+  F <- ((m*s-2*lambda)/(pp*qq))*((1-LR^(1/s))/LR^(1/s)); 
+  df1 <- pp*qq; df2 <-(m*s-2*lambda);
+  pval <- 1-pf(F, df1, df2)
+  outmat<-round(cbind(sqrt(rsquared),rsquared,LR,
+                      F,df1,df2, pval),dec)
+  colnames(outmat) = list("R", "RSquared", "LR", "ApproxF",
+                          "NumDF", "DenDF", "pvalue")
+  rownames(outmat) = as.character(1:q);
+  xrels<-round(cor(x,x%*%E1$vectors)[,1:q],dec)
+  colnames(xrels) <- apply( cbind(rep("U", q), as.character(1:q)),
+                            1, paste, collapse ="" )
+  yrels <- round(cor(y, y%*%E2$vectors)[ ,1:q], dec)
+  colnames(yrels) <- apply( cbind(rep("V", q), as.character(1:q)), 
+                            1, paste, collapse = "")
+  list( Summary = outmat, a.Coefficients = E1$vectors,
+        b.Coefficients = E2$vectors,
+        XUCorrelations = xrels, YVCorrelations = yrels )
+}   
   
+cc2 <- function (df1, df2) {
+  require(CCA)
+  df.ca=cc(df1, df2)
   
+  # tests of canonical dimensions
+  ev <- (1 - df.ca$cor^2)
   
+  n <- dim(df1)[1]; p <- length(df1)
+  q <- length(df2); k <- min(p, q)
+  m <- n - 3/2 - (p + q)/2;  w <- rev(cumprod(rev(ev)))
+  
+  # initialize
+  d1 <- d2 <- f <- vector("numeric", k)
+  
+  for (i in 1:k) {
+    s <- sqrt((p^2 * q^2 - 4)/(p^2 + q^2 - 5))
+    si <- 1/s
+    d1[i] <- p * q; d2[i] <- m * s - p * q/2 + 1
+    r <- (1 - w[i]^si)/w[i]^si
+    f[i] <- r * d2[i]/d1[i]
+    p <- p - 1; q <- q - 1
+  }
+  
+  pv <- pf(f, d1, d2, lower.tail = FALSE)
+  dmat <- cbind(WilksL = w, F = f, df1 = d1, df2 = d2, p = pv)
+  result=list(summary=df.ca,Ftest=dmat)
+  return(result)
+}  
