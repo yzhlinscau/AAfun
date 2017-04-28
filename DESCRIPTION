@@ -12,6 +12,7 @@ Imports:
     amap,
     agricolae,
     agridat,
+    CCA,
     corrgram,
     dplyr,
     genetics,
