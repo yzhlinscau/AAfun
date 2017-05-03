@@ -61,6 +61,8 @@ Website for instant update: yzhlin-asreml.ys168.com
 
 \examples{
 library(AAfun)
+library(MCMCglmm)
+        
 data(PrSpa)
 
 df<-subset(PrSpa,Spacing=='3')
