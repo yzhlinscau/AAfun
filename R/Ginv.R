@@ -1,5 +1,5 @@
 Ginv <-
-function (marker.file, ped.file, aped.rowNames, path=NULL, Goptions=1) {
+function (Marker.file, ped.file, aped.rowNames, path=NULL, Goptions=1) {
   #library(genetics)   
   #library(GeneticsPed)  
   #library(asreml)
