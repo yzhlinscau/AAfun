@@ -1,11 +1,13 @@
 # AAfun
 ASReml-R Added functions
 
+# Atension: AAfun is under updating, thus it will be not available for some time.
+
 ## INSTALL
 source("http://bioconductor.org/biocLite.R") 
 biocLite(c("GeneticsPed","genetics"))
 
-install.packages(c('amap',"agricolae","agridat","corrgram","grid",'ggplot2',"gplots","MCMCglmm",'nadiv',"plyr","reshape2","sqldf"))
+**install.packages(c('amap',"agricolae","agridat","corrgram","grid",'ggplot2',"gplots","MCMCglmm",'nadiv',"plyr","reshape2","sqldf"))
 
 devtools::install_github('yzhlinscau/AAfun')
 
