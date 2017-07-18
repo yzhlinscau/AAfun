@@ -1,7 +1,7 @@
 # AAfun
 ASReml-R Added functions
 
-# Atension: AAfun is under updating, thus it will be not available for some time.
+# Attension: AAfun is under updating, thus it will be not available for some time.
 
 ## INSTALL
 source("http://bioconductor.org/biocLite.R") 
