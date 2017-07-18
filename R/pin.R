@@ -1,5 +1,5 @@
 pin <-
-function(object1, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL){
+function(Object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL){
   if(is.null(signif)) signif=FALSE
   if(is.null(Rdf)) Rdf=FALSE  
   
