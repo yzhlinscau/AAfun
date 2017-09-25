@@ -1,4 +1,4 @@
-asreml.batch <- function (Data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
+asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
                            mulT=NULL, mulN=NULL,mulR=NULL,corM=NULL,corMout=FALSE,
                            pformula=NULL,pformula1=NULL,pformula2=NULL,
                            pformula3=NULL,pformula4=NULL,maxit=NULL,#SPmodel=FALSE,
