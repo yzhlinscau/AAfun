@@ -1,7 +1,7 @@
 # AAfun
 ASReml-R Added functions
 
-# Attension: AAfun is under updating, thus it will be not available for some time.
+# Attension: AAfun is now only available and works only for ASReml-R V3.0. And new version of AAfun is under developing for ASReml-R V4.0. Since ASReml-R V4.0 is quite different from V3.0, the new AAfun might need long time.
 
 ## INSTALL
 source("http://bioconductor.org/biocLite.R") 
