@@ -49,7 +49,7 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL){
     tname<-rownames(summary(object)$varcomp)[1:n]    
     siglevel<-sig.level(tvalue,se)
     
-    options(digits=3) 
+    #options(digits=3) 
     print(data.frame(row.names=tname,Estimate=tvalue, SE=se, sig.level=siglevel))
     cat("---------------")
     cat("\nSig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n\n")    
