@@ -4,7 +4,7 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
                            pformula3=NULL,pformula4=NULL,maxit=NULL,#SPmodel=FALSE,
                            ped=NULL,pedinv=NULL,ginverse=NULL) {
 
-  options(digits=3)
+  #options(digits=3)
   if(is.null(mulT)) mulT=FALSE
   if(is.null(mulR)) mulR=FALSE
   if(is.null(corM)) corM=FALSE
