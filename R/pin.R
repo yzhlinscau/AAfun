@@ -29,11 +29,11 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL){
     cat("\n")
     #options(digits=3)
     if(signif==TRUE){ 
-      print(format(result1, nsmall=3))
+      print(format(result1, digits=3,nsmall=3))
       cat("---------------")
       cat("\nSig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n")    
     }else{
-      if(Rdf==TRUE) print(format(vv, nsmall=3)) else print(format(result, nsmall=3))
+      if(Rdf==TRUE) print(format(vv, digits=3,nsmall=3)) else print(format(result, digits=3,nsmall=3))
       }
     cat("\n")
   }
@@ -50,7 +50,7 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL){
     siglevel<-sig.level(tvalue,se)
     
     result2=data.frame(row.names=tname,Estimate=tvalue, SE=se, sig.level=siglevel)
-    print(format(result2, nsmall=3))
+    print(format(result2, digits=3,nsmall=3))
     cat("---------------")
     cat("\nSig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n\n")    
   }
