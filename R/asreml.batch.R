@@ -282,11 +282,11 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
   if(mulR==TRUE&&mulN==2){
     tr=list(Varcomp=mm1, Corr.erro.matrix=rr,Corr.sig.matrix=rr2)
     #cat("\n\nCorr and error matrix:\n")
-    print(format(tr, nsmall=3)) #print(tr)
+    print(format(tr,digits=3, nsmall=3)) #print(tr)
     cat("=================\n")
     cat("upper is corr and lower is error (or sig.level) for corr matrix.\n")
     cat("Sig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n\n")
-  }else {print(format(mm1, nsmall=3)) #print(mm1)}
+  }else {print(format(mm1,digits=3, nsmall=3)) #print(mm1)}
   
   #if(corMout==TRUE) return(rr)
 }
