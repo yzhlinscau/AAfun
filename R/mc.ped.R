@@ -2,6 +2,7 @@ mc.ped <-
 function(ped){
   ped[ped==0]=NA
   ped[ped=='.']=NA
+  
   for(i in 1:3){ped[,i]<-as.factor(ped[,i])}
   p1a<-levels(ped[,2])
   p1b<-levels(ped[,3])
