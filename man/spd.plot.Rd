@@ -39,7 +39,7 @@ Transform NA to 0(na=0) or keep NA (default)
 Parameters of the colors for figures
 }
   \item{\mtitle}{
-Parameters of the function filled.contour()
+Figure title
 }
 }
 \value{
@@ -51,7 +51,8 @@ Parameters of the function filled.contour()
   \item{y.unit }{Axis y least unit, default value is 1.}
   \item{na }{Control NA value, default value is 1 to keep NA.}
   \item{color.p }{Parameters of the colors for figures, default value is terrain.colors, it could be rainbow, heat.colors, cm.colors and topo.colors, ...}
-%% ...
+  \item{mtitle }{Figure title}
+     %% ...
 }
 \author{
 Yuanzhen Lin <yzhlinscau@163.com>
