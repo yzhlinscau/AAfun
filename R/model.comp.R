@@ -1,5 +1,5 @@
 model.comp<-
-function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
+  function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
     #library(plyr)
     if(is.null(mulM)) mulM=FALSE
     if(is.null(LRT)) LRT=FALSE
@@ -8,11 +8,12 @@ function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
     cat("Attension:\n")
     cat("Fixed factors should be the same!\n\n\n")
     
-    Mnames=vector() #NULL
+    Mnames=vector()#<-NULL
+    LogL=Pm=Nedf=vector()
     Npm<-0
     if(mulM==TRUE){
       Nmls=ceiling(length(Nml)/43) # Nmls=(length(Nml)/43)
-      LogL=Pm=Nedf=0
+      #LogL=Pm=Nedf=vector()
       for(i in 1:Nmls){
         LogL[i]<-Nml[[2+(i-1)*43]]
         Pm[i]=length(Nml[[3+(i-1)*43]])
@@ -20,13 +21,13 @@ function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
         #Mnames[i]<-deparse(substitute(Nm1[i]))
       }
     }else {
-      LogL=c(m1[[2]],m2[[2]]) #c(m1$loglik,m2$loglik) #fm[[2]]
+      LogL=c(m1[[2]],m2[[2]]) #fm[[2]] c(m1$loglik,m2$loglik)#
       Pm=c(length(m1[[3]]),length(m2[[3]]))#c(m1$gammas,m2$gammas) #length(fm[[3]])
       Nedf=c(m1[[17]],m2[[17]])#c(m1$nedf,m2$nedf)
       Nmls=2
       Mnames<-c(deparse(substitute(m1)),deparse(substitute(m2)))
     } 
-        
+    
     df<-data.frame(LogL=LogL,Npm=Pm)
     AIC=2*(Pm-LogL)
     df$AIC<-AIC    
@@ -46,8 +47,8 @@ function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
     cat("-----------------------------\n")
     cat("Lower AIC and BIC is better model.\n\n")
     
-    LA<-combn(1:Nmls,2)
-    LB<-Nmls*(Nmls-1)/2
+    A<-combn(1:Nmls,2)
+    B<-Nmls*(Nmls-1)/2
     
     if(LRT==TRUE){
       cat("\n\n")
@@ -56,8 +57,8 @@ function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
       cat("In the present, just allow one object's length < 43.")
       cat("\n=====================================")
       cat("\nLikelihood ratio test (LRT) results:\n\n")
-      for(i in 1:LB){
-        if(LB>1)df1<-df[LA[,i],1:4] else df1<-df[1:2,1:4]
+      for(i in 1:B){
+        if(B>1)df1<-df[A[,i],1:4] else df1<-df[1:2,1:4]
         df1<-arrange(df1,df1$Npm)
         DlogL=df1$LogL[2]-df1$LogL[1]
         Ddf=df1$Npm[2]-df1$Npm[1]
@@ -86,7 +87,7 @@ function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
       }else {
         cat("\nAttension: Ddf did not minus 0.5. \n")
         cat("When for corr model, against 0. \n\n")
-        }
-
+      }
+      
     }  
-}
+  }
