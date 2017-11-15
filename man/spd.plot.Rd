@@ -10,7 +10,7 @@ This function plots spatial data for further spatial model or variogram result f
 \usage{
 spd.plot(object, type="data",p.lbls = NULL, key.unit = NULL,
           x.unit = NULL, y.unit = NULL, 
-          na = NULL, color.p = NULL, ...)
+          na = NULL, color.p = NULL, mtitle=NULL,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -38,7 +38,7 @@ Transform NA to 0(na=0) or keep NA (default)
   \item{color.p}{
 Parameters of the colors for figures
 }
-  \item{\dots}{
+  \item{\mtitle}{
 Parameters of the function filled.contour()
 }
 }
