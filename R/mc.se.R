@@ -14,7 +14,7 @@ mc.se <-
     if(is.null(conf.level)) conf.level=0.95
     a=1-conf.level
     ta=qt(1-a/2,n-1)
-    se=vector() #NULL
+    se=vector() #=NULL
     for(i in 1:length(lv)){
       se[i]=(uv[i]-lv[i])/(2*ta)
     }
