@@ -1,7 +1,7 @@
 ir2r.sp<-
 function(object,row.max=NULL,col.max=NULL){
   # Row=NULL,Col=NULL,
-  #require(sqldf)
+  #require(sqldf);require(plyr)
   
   df<-object
   #names(df)[1:2]<-c("Row","Col")
