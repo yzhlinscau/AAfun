@@ -41,14 +41,11 @@ function(object,site,faN=1,kn=NULL){
   cat("Site cluster results:\n")
   print(tree.id<-cutree(chcluster,k=kn))
   
-  if(n<=16){
+  if(n<16){
     #windows(10,8)
     corrgram(df, type="cor",order=T, lower.panel=panel.pie,
                upper.panel=panel.conf, text.panel=panel.txt,
                main="Fig.2 Correlogram of different sites")
-  }
-  if(n>16){
-   cat("\nSince too many variables, the corrgram do not work.\n")
   }
   
   cat("\nCov\\Var\\Corr matrix\n\n")
