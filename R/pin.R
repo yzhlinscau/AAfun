@@ -1,25 +1,34 @@
 pin <-
-function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL){
+function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL,asrV=3){
   if(is.null(signif)) signif=FALSE
-  if(is.null(Rdf)) Rdf=FALSE  
+  if(is.null(Rdf)) Rdf=FALSE
   
   if(!is.null(formula)){
     transform<-formula
     #if(is.null(N)) N<-0
-    pframe <- as.list(object$gammas)
+    ifelse(asrV==4,pframe <- as.list(object$vparameters),
+           pframe <- as.list(object$gammas))
     names(pframe) <- paste("V", seq(1, length(pframe)), sep = "")
     tvalue<-eval(deriv(transform[[length(transform)]], names(pframe)),pframe)
-    X <- as.vector(attr(tvalue, "gradient"))
-    X[object$gammas.type == 1] <- 0
-    tname <- if(length(transform)==3){transform[[2]]}else ""
-    n <- length(pframe)
-    i <- rep(1:n, 1:n)
-    j <- sequence(1:n)
-    k <- 1 + (i > j)
-    Vmat <- object$ai
-    se <- sqrt(sum(Vmat * X[i] * X[j] * k))
+    # X <- as.vector(attr(tvalue, "gradient"))
+    # if(asrV==3) X[object$gammas.type == 1] <- 0
+    #ifelse(asrV==4,X[object$vparameters.type == 1] <- 0,X[object$gammas.type == 1] <- 0)
+    X <- matrix(as.vector(attr(tvalue, "gradient")), ncol = 1)
     
-    vv=vector() #NULL
+    # tname <- if(length(transform)==3){transform[[2]]}else ""
+    tname <- if (length(transform) == 3) transform[[2]] else deparse(transform[[2]])
+    
+    if(asrV==4) se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
+    else{
+      n <- length(pframe)
+      i <- rep(1:n, 1:n)
+      j <- sequence(1:n)
+      k <- 1 + (i > j)
+      Vmat <- object$ai
+      se <- sqrt(sum(Vmat * X[i] * X[j] * k))
+    }
+
+    vv=vector() #<-NULL
     vv[1]=tvalue;vv[2]=se
     
     result<-data.frame(row.names=tname, Estimate=tvalue, SE=se)
@@ -29,11 +38,11 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL){
     cat("\n")
     #options(digits=3)
     if(signif==TRUE){ 
-      print(format(result1, digits=3,nsmall=3))
+      print(result1)
       cat("---------------")
       cat("\nSig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n")    
     }else{
-      if(Rdf==TRUE) print(format(vv, digits=3,nsmall=3)) else print(format(result, digits=3,nsmall=3))
+      if(Rdf==TRUE) print(vv) else print(result)
       }
     cat("\n")
   }
@@ -44,13 +53,17 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL){
                     corN<-1} 
     n<-corN
     df<-summary(object)$varcomp
-    tvalue<-as.vector(df[1:n,2])
-    se<-as.vector(df[1:n,3])
+    if(asrV==3){tvalue<-as.vector(df[1:n,2])
+                se<-as.vector(df[1:n,3])
+    }else{
+      tvalue<-as.vector(df[1:n,1])
+      se<-as.vector(df[1:n,2])
+    }
     tname<-rownames(summary(object)$varcomp)[1:n]    
     siglevel<-sig.level(tvalue,se)
     
-    result2=data.frame(row.names=tname,Estimate=tvalue, SE=se, sig.level=siglevel)
-    print(format(result2, digits=3,nsmall=3))
+
+    print(data.frame(row.names=tname,Estimate=tvalue, SE=se, sig.level=siglevel))
     cat("---------------")
     cat("\nSig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n\n")    
   }
@@ -58,6 +71,35 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL){
 
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
+vpredict2=function (object, xform,signif=FALSE) 
+{
+  #options(digits=3)
+  if (!inherits(object, "asreml")) 
+    stop("Argument must be an asreml object")
+  pframe <- as.list(object$vparameters)
+  names(pframe) <- paste("V", seq(1, length(pframe)), sep = "")
+  tvalue <- eval(deriv(xform[[length(xform)]], names(pframe)), 
+                 pframe)
+  X <- matrix(as.vector(attr(tvalue, "gradient")), ncol = 1)
+  tname <- if (length(xform) == 3) xform[[2]] else deparse(xform[[2]])
+  se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
+  result<-data.frame(row.names = tname, Estimate = tvalue, SE = se)
+  
+  result1<-result
+  result1$sig.level<-sig.level(tvalue,se)
+  
+  cat("\n")
+  if(signif==TRUE){ 
+    print(result1)
+    cat("---------------")
+    cat("\nSig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n")    
+  }else{
+    print(result)
+  }
+  cat("\n")
+
+}
+
 # sig.level functions
 
 sig.level<-function(tvalue,se,...){
@@ -75,7 +117,7 @@ sig.level<-function(tvalue,se,...){
 }
 
 sig.level2=function(x){
-  tt=vector() #NULL
+  tt=vector() #=NULL
   n=length(x)
   for(i in 1:n){
     if(abs(x[i])<0.001) tt[i]='***'
@@ -87,8 +129,7 @@ sig.level2=function(x){
   return(tt)
 }
 
-  
- # ----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # other functions for chapter 6
 # ----------------------------------------------------------------------------
 
@@ -274,69 +315,3 @@ relweights <- function(fit,...){
           ...) 
   return(import)
 }
- 
-# ----------------------------------------------------------------------------
-# other functions for 5.8.1.3
-# ---------------------------------------------------------------------------- 
-cancor2 <- function(x, y, dec = 4){
-  x <- as.matrix(x); y <- as.matrix(y)
-  n<-dim(x)[1]; q1<-dim(x)[2]; q2<-dim(y)[2]; q<-min(q1,q2)
-  S11 <- cov(x); S12 <- cov(x, y); S21 <- t(S12); S22 <- cov(y)
-  E1 <- eigen(solve(S11)%*%S12%*%solve(S22)%*%S21)
-  E2 <- eigen(solve(S22)%*%S21%*%solve(S11)%*%S12)
-  rsquared <-E1$values[1:q] #as.real()
-  LR=pp=qq=tt <- NULL
-  for ( i in 1:q ){
-    LR <- c(LR, prod(1-rsquared[i:q]))
-    pp <- c(pp, q1-i+1)
-    qq <- c(qq, q2-i+1)
-    tt <- c(tt, n-1-i+1)}
-  m <- tt-0.5*(pp+qq+1); lambda <- (1/4)*(pp*qq-2); 
-  s <- sqrt((pp^2*qq^2-4)/(pp^2+qq^2-5))
-  F <- ((m*s-2*lambda)/(pp*qq))*((1-LR^(1/s))/LR^(1/s)); 
-  df1 <- pp*qq; df2 <-(m*s-2*lambda);
-  pval <- 1-pf(F, df1, df2)
-  outmat<-round(cbind(sqrt(rsquared),rsquared,LR,
-                      F,df1,df2, pval),dec)
-  colnames(outmat) = list("R", "RSquared", "LR", "ApproxF",
-                          "NumDF", "DenDF", "pvalue")
-  rownames(outmat) = as.character(1:q);
-  xrels<-round(cor(x,x%*%E1$vectors)[,1:q],dec)
-  colnames(xrels) <- apply( cbind(rep("U", q), as.character(1:q)),
-                            1, paste, collapse ="" )
-  yrels <- round(cor(y, y%*%E2$vectors)[ ,1:q], dec)
-  colnames(yrels) <- apply( cbind(rep("V", q), as.character(1:q)), 
-                            1, paste, collapse = "")
-  list( Summary = outmat, a.Coefficients = E1$vectors,
-        b.Coefficients = E2$vectors,
-        XUCorrelations = xrels, YVCorrelations = yrels )
-}   
-  
-cc2 <- function (df1, df2) {
-  require(CCA)
-  df.ca=cc(df1, df2)
-  
-  # tests of canonical dimensions
-  ev <- (1 - df.ca$cor^2)
-  
-  n <- dim(df1)[1]; p <- length(df1)
-  q <- length(df2); k <- min(p, q)
-  m <- n - 3/2 - (p + q)/2;  w <- rev(cumprod(rev(ev)))
-  
-  # initialize
-  d1 <- d2 <- f <- vector("numeric", k)
-  
-  for (i in 1:k) {
-    s <- sqrt((p^2 * q^2 - 4)/(p^2 + q^2 - 5))
-    si <- 1/s
-    d1[i] <- p * q; d2[i] <- m * s - p * q/2 + 1
-    r <- (1 - w[i]^si)/w[i]^si
-    f[i] <- r * d2[i]/d1[i]
-    p <- p - 1; q <- q - 1
-  }
-  
-  pv <- pf(f, d1, d2, lower.tail = FALSE)
-  dmat <- cbind(WilksL = w, F = f, df1 = d1, df2 = d2, p = pv)
-  result=list(summary=df.ca,Ftest=dmat)
-  return(result)
-}  
