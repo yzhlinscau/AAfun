@@ -19,7 +19,7 @@ snp.batch <- function (data,SNP.N,traitN,FMod=NULL,maxit=NULL,SNP.detail=FALSE,
   aaN=length(aa);ccN=length(cc)
   
   mm<-data.frame();tt=SNP.infor=list()
-  NTrait=N.Snp=SNP.p=vector() #NULL
+  NTrait=N.Snp=SNP.p=vector() #=NULL
   
   for(i in 1:ccN){
     df1=data[,c(aa,cc[i])]
@@ -58,7 +58,7 @@ snp.batch <- function (data,SNP.N,traitN,FMod=NULL,maxit=NULL,SNP.detail=FALSE,
       tt[[i]]=list(Trait=NTrait[i],SNP.p=mm,SNP.infor=SNP.infor)
     }
   }  
-  print(tt)  
+  print(tt)   
   cat("=================\n")
   cat("Sig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 '.' 0.10 'Not signif' 1\n\n")
 }
