@@ -20,9 +20,9 @@ function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
         #Mnames[i]<-deparse(substitute(Nm1[i]))
       }
     }else {
-      LogL=c(m1$loglik,m2$loglik) #fm[[2]]
-      Pm=c(m1$gammas,m2$gammas) #length(fm[[3]])
-      Nedf=c(m1$nedf,m2$nedf)
+      LogL=c(m1[[2]],m2[[2]]) #c(m1$loglik,m2$loglik) #fm[[2]]
+      Pm=c(length(m1[[3]]),length(m2[[3]]))#c(m1$gammas,m2$gammas) #length(fm[[3]])
+      Nedf=c(m1[[17]],m2[[17]])#c(m1$nedf,m2$nedf)
       Nmls=2
       Mnames<-c(deparse(substitute(m1)),deparse(substitute(m2)))
     } 
