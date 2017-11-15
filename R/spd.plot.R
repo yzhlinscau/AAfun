@@ -20,28 +20,9 @@ function(object,type="data",p.lbls=NULL,key.unit=NULL,
   object.1<-(object[,3])
   df <-matrix(object.1,nrow=ncol,byrow=TRUE)
   if(is.null(na)) na=1
-  if(na==0)  df[is.na(df)]<-0.0001  # reduce effects of NA value in data 
-  
+  if(na==0)  df[is.na(df)]<-0.0001  # reduce effects of NA value in data  
   x = 1 : nrow(df) 
   y = 1 : ncol(df)
-  
-  #if(max(x)>20){
-  #  if(max(x)%%2!=0){if(is.null(x.unit)) seq(1,max(x),by=2)
-  #                    else{x.axis<-seq(1,max(x),by=x.unit)} 
-  #                          }else{
-  #                              if(is.null(x.unit)) x.axis<-seq(2,max(y),by=2)
-  #                               else{x.axis<-seq(2,max(x),by=x.unit)}}
-  #}else{if(is.null(x.unit)) x.axis<-seq(1,max(x),by=1)
-  #       else{x.axis<-seq(1,max(x),by=x.unit)}}
-  
-  #if(max(y)>15){
-  #  if(max(y)%%2!=0){if(is.null(y.unit))seq(1,max(y),by=2)
-  #                    else{y.axis<-seq(1,max(y),by=y.unit)}
-  #                           }else{
-  #                                  if(is.null(y.unit)) y.axis<-seq(2,max(y),by=2)
-  #                                   else{y.axis<-seq(2,max(y),by=y.unit)}}
-  #}else{if(is.null(y.unit)) y.axis<-seq(1,max(y),by=1)
-  #      else{y.axis<-seq(1,max(y),by=y.unit)}}
   
   if(is.null(x.unit)) x.unit=1
   if(is.null(y.unit)) y.unit=1
@@ -61,7 +42,4 @@ function(object,type="data",p.lbls=NULL,key.unit=NULL,
                  }, 
                  key.title = title(main=lbls2, cex.main=1.0) 
   )
-  #abline(v=0, h=seq(1, max(y), by=1),lty=2,col="grey75") 
-  #abline(h=0, v=seq(1, max(x), by=1),lty=2,col="gray75")
-  
 }
