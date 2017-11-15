@@ -21,8 +21,8 @@ function(object,type="data",p.lbls=NULL,key.unit=NULL,
   df <-matrix(object.1,nrow=ncol,byrow=TRUE)
   if(is.null(na)) na=1
   if(na==0)  df[is.na(df)]<-0.0001  # reduce effects of NA value in data  
-  x = 1 : nrow(df) 
-  y = 1 : ncol(df)
+  x = 1:nrow(df) 
+  y = 1:ncol(df)
   
   if(is.null(x.unit)) x.unit=1
   if(is.null(y.unit)) y.unit=1
@@ -40,6 +40,5 @@ function(object,type="data",p.lbls=NULL,key.unit=NULL,
                    axis(1,x.axis) 
                    axis(2,y.axis) 
                  }, 
-                 key.title = title(main=lbls2, cex.main=1.0) 
-  )
+                 key.title = title(main=lbls2, cex.main=1.0) )
 }
