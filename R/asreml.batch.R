@@ -1,7 +1,8 @@
 asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
                            mulT=NULL, mulN=NULL,mulR=NULL,corM=NULL,corMout=FALSE,
                            pformula=NULL,pformula1=NULL,pformula2=NULL,
-                           pformula3=NULL,pformula4=NULL,maxit=NULL,#SPmodel=FALSE,
+                           pformula3=NULL,pformula4=NULL,sigFormula=NULL,
+                           maxit=NULL,#SPmodel=FALSE,
                            ped=NULL,pedinv=NULL,ginverse=NULL) {
 
   #options(digits=3)
@@ -28,7 +29,7 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
     Vmat <- object$ai
     se <- sqrt(sum(Vmat * X[i] * X[j] * k))
     #data.frame(row.names = tname, Estimate = tvalue, SE = se)
-    vv<-NULL
+    vv=vector() #<-NULL
     vv[1]=tvalue;vv[2]=se
     names(vv)=c(tname,paste(tname,"se",sep="."))
     return(vv)
@@ -36,16 +37,16 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
   
   aa=factorN;cc=traitN
   aaN=length(aa);ccN=length(cc)
-  NTrait=pedinv=ginverse2=vector() #NULL
+  NTrait=pedinv=ginverse2=vector() #=NULL
   
   fm <-list()
   mm1<-data.frame();mm2<-data.frame()
-  H2=RS=RS2=H2.se=vector() #NULL
-  Nvar=Nvar1=Nvar2=Nvar3=vector() #NULL
-  H3=H4=H5=H6=vector() #NULL
-  H3.se=H4.se=H5.se=H6.se=vector() #NULL
-  vv2=vv3=vv4=vv5=vv6=vector() #NULL
-  ARV=RV=RV.se=vector() #NULL
+  H2=RS=RS2=H2.se=vector() #=NULL
+  Nvar=Nvar1=Nvar2=Nvar3=vector() #=NULL
+  H3=H4=H5=H6=vector() #=NULL
+  H3.se=H4.se=H5.se=H6.se=vector() #=NULL
+  vv2=vv3=vv4=vv5=vv6=vector() #=NULL
+  ARV=RV=RV.se=vector() #=NULL
   
   if(mulT==FALSE){
     for(i in 1:ccN){
@@ -115,7 +116,7 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
     if((ccN/mulN)==1){bb=cc;bbn=1}
     if((ccN/mulN<1)){cat("\nThe trait No is less than in the model!\n");break}
     
-    vvN=vector() #NULL
+    vvN=vector() #=NULL
     
     for(n in 1:bbn){
       if((ccN/mulN)>1) df1=data[,c(aa,bb[,n])] else df1=data[,c(aa,bb)]
@@ -165,7 +166,8 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
         mm2[n,jj]=round(Var[jj,3],4) # se
       }
       
-      ##
+      ## just only gcorr or add parameter -- sigFormula
+      #if(is.null(sigFormula)) ARV=pin2(fm, rg~V2/sqrt(V1 * V3)) else ARV=pin2(fm, sigFormula)
       ARV=pin2(fm, rg~V2/sqrt(V1 * V3))
       RV[n]=round(ARV[1],3);RV.se[n]=round(ARV[2],3)
       
@@ -273,20 +275,40 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
   if(mulT==TRUE) cat("\nVariance order:",paste(Nvar3,collapse=", ")) else cat("\nVariance order:",paste(unique(Nvar2),collapse=", "))
   cat("\n\n")
   
-  nn=ncol(mm1)
+  nn=ncol(mm1) # var,v.se--nmm
   mm1[,nn+1]=RS
   names(mm1)[nn+1]="Converge"
   mm1[,nn+2]=RS2
   names(mm1)[nn+2]="Maxit"
   
+  nn2=ncol(mm1)
+  if(is.null(sigFormula)) sigFormula=FALSE
+  if(sigFormula==TRUE){
+    dsig=mm1[,c(1,(nmm+2):(nn2-2))]
+    ndsig=ncol(dsig)
+    nsig=(ndsig-1)/2
+    nmsig=c("pformula",paste("pformula",nsig-1,sep=""))
+    for(i in 1:nsig){
+      RV2=dsig[,2*i]
+      RV2.se=dsig[,(2*i+1)]
+      dsiglevel<-sig.level(RV2,RV2.se)
+      dsiglevel=sub("Not signif","",dsiglevel)
+      dsig[,(ndsig+i)]=dsiglevel
+      #colnames(dsig[(ndsig+i)])=nmsig[i]#names(dsig[2*i])
+    }
+    ndsig2=ncol(dsig)
+    names(dsig[,(ndsig2-nsig+1):ndsig2])=nmsig
+    print(dsig)
+  }
+  
   if(mulR==TRUE&&mulN==2){
     tr=list(Varcomp=mm1, Corr.erro.matrix=rr,Corr.sig.matrix=rr2)
     #cat("\n\nCorr and error matrix:\n")
-    print(format(tr,digits=3, nsmall=3)) #print(tr)
+    print(tr)
     cat("=================\n")
     cat("upper is corr and lower is error (or sig.level) for corr matrix.\n")
     cat("Sig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n\n")
-  }else {print(format(mm1,digits=3, nsmall=3)) #print(mm1)}
+  }else {print(mm1)}
   
-  #if(corMout==TRUE) return(rr)
+  if(corMout==TRUE) return(rr)
 }
