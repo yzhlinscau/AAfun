@@ -43,7 +43,7 @@ met.biplot <-
       
       if(faN>2){
         for(i in 1:bl){
-          #windows(18,8)
+          windows(18,8)
           par(mfrow=c(1,2))
           biplot(scores[,acb[,i]],Lam[,acb[,i]],cex=0.75,
                  main=paste("Fig 2-",i, " biplot with all variety",sep=""))
