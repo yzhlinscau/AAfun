@@ -6,8 +6,8 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL,asrV=3){
   if(!is.null(formula)){
     transform<-formula
     #if(is.null(N)) N<-0
-    ifelse(asrV==4,pframe <- as.list(object$vparameters),
-           pframe <- as.list(object$gammas))
+    #ifelse(asrV==4,pframe <- as.list(object$vparameters),
+           pframe <- as.list(object$gammas)#)
     names(pframe) <- paste("V", seq(1, length(pframe)), sep = "")
     tvalue<-eval(deriv(transform[[length(transform)]], names(pframe)),pframe)
     # X <- as.vector(attr(tvalue, "gradient"))
@@ -18,15 +18,15 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL,asrV=3){
     # tname <- if(length(transform)==3){transform[[2]]}else ""
     tname <- if (length(transform) == 3) transform[[2]] else deparse(transform[[2]])
     
-    if(asrV==4) se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
-    else{
+    #if(asrV==4) se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
+    #else{
       n <- length(pframe)
       i <- rep(1:n, 1:n)
       j <- sequence(1:n)
       k <- 1 + (i > j)
       Vmat <- object$ai
       se <- sqrt(sum(Vmat * X[i] * X[j] * k))
-    }
+    #}
 
     vv=vector() #<-NULL
     vv[1]=tvalue;vv[2]=se
@@ -55,10 +55,10 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL,asrV=3){
     df<-summary(object)$varcomp
     if(asrV==3){tvalue<-as.vector(df[1:n,2])
                 se<-as.vector(df[1:n,3])
-    }else{
-      tvalue<-as.vector(df[1:n,1])
-      se<-as.vector(df[1:n,2])
-    }
+    }#else{
+    #  tvalue<-as.vector(df[1:n,1])
+    #  se<-as.vector(df[1:n,2])
+    #}
     tname<-rownames(summary(object)$varcomp)[1:n]    
     siglevel<-sig.level(tvalue,se)
     
