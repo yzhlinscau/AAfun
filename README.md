@@ -4,8 +4,6 @@ ASReml-R Added functions
 # Attension: AAfun is now available and works for ASReml-R V3.0 or ASReml-R V4.0. The online version AAfun is only for ASReml-R V3.0. The new version AAfun4 works for ASReml-R V4.0, but not supplied online in present. If readers feel interesting in AAfun4, you can get the package AAfun4 by sending email to me (yzhlinscau@163.com).
 
 ## INSTALL
-source("http://bioconductor.org/biocLite.R") 
-biocLite(c("GeneticsPed","genetics"))
 
 install.packages(c('amap',"agricolae","agridat","grid",'ggplot2',"gplots",
 "devtools","MCMCglmm",'nadiv',"plyr","reshape2","sqldf"))
