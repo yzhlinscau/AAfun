@@ -22,5 +22,5 @@ Imports:
     reshape2,
     sqldf
 License: GPL-3
-LazyData: true
+LazyData: no
 Repository: CRAN
