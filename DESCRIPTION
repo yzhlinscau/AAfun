@@ -12,7 +12,6 @@ Imports:
     amap,
     agricolae,
     agridat,
-    CCA,
     dplyr,
     ggplot2,
     gplots,
@@ -20,6 +19,7 @@ Imports:
     MASS,
     Matrix,
     MCMCglmm,
+    plyr,
     reshape2,
     sqldf
 License: GPL-3
