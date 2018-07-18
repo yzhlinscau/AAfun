@@ -1,6 +1,6 @@
 import(amap,agricolae,agridat,
 #corrgram,
-dplyr,ggplot2,gplots,grid,
+ggplot2,gplots,grid,
 MASS,Matrix,MCMCglmm,nadiv,reshape2,sqldf,plyr
 )
 
