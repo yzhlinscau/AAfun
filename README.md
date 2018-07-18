@@ -8,7 +8,7 @@ source("http://bioconductor.org/biocLite.R")
 biocLite(c("GeneticsPed","genetics"))
 
 install.packages(c('amap',"agricolae","agridat","grid",'ggplot2',"gplots",
-"devtools","dplyr","MCMCglmm",'nadiv',"plyr","reshape2","sqldf"))
+"devtools","MCMCglmm",'nadiv',"plyr","reshape2","sqldf"))
 
 devtools::install_github('yzhlinscau/AAfun')
 
