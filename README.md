@@ -175,6 +175,8 @@ comparison among more than two models:
 model.comp(Nml=c(fm3a,fm3b,fm1a,fm1b,fm1),mulM=TRUE)
 model.comp(Nml=c(fm3a,fm3b,fm1a,fm1b,fm1),mulM=TRUE,LRT=TRUE)
 ```
+
+## function 4 met.corr() etc: used for multi-environment trials
 ``` r
 ##  met.plot(): plots MET data
 ##  met.corr(): calculate var/cov/corr from asreml MET factor analytic results
