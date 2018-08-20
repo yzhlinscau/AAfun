@@ -1,13 +1,13 @@
 met.corr <-
-function(object,site,faN=1,kn=NULL){
+function(object,site,faN=1,kn=NULL,faRS=1){
   #require(amap)
   #require(corrgram)
   
   if(is.null(kn)) kn=3
   n<-nlevels(site)
-  vect1<-summary(object)$varcomp$component[1:n]
+  vect1<-summary(object)$varcomp$component[faRS:(n+faRS-1)]
   w.var<-diag(vect1)
-  vect2<-summary(object)$varcomp$component[(n+1):((1+faN)*n)]
+  vect2<-summary(object)$varcomp$component[(n+faRS):((1+faN)*n+faRS-1)]
   t.var<-matrix(vect2,nrow=n)
   
   wt.var<-t.var%*%t(t.var)+w.var
