@@ -57,55 +57,55 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
       names(df1)[nn]="y"
       if(is.null(EMod)) EMod=~units
       
-      if(ped==FALSE) fm<-asreml(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit, data=df1,trace=FALSE)
+      if(ped==FALSE) fm<-asreml::asreml(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit, data=df1,trace=FALSE)
       if(ped==TRUE) {
         #fm<-asreml(fixed=FMod, random=RMod,maxit=maxit, ginverse=ginverse2, data=df1,trace=F)
-        fm<- do.call(asreml,list(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit,ginverse=ginverse, data=quote(df1),trace=FALSE))
+        fm<- do.call(asreml::asreml,list(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit,ginverse=ginverse, data=quote(df1),trace=FALSE))
       }
       
-      Var=summary(fm)$varcomp
-      Nvar=row.names(Var)
-      Nvar1=strsplit(Nvar,"!")
-      nn=length(Nvar1)
+      Var<-summary(fm)$varcomp
+      Nvar<-row.names(Var)
+      Nvar1<-strsplit(Nvar,"!")
+      nn<-length(Nvar1)
       #if(SPmodel==TRUE) {
       #  for(x in 1:(nn-2)) Nvar2[x]=Nvar1[[x]][1]
       #  for(x in (nn-1):nn) Nvar2[x]=Nvar1[[x]][2]
       #}else {
-        for(x in 1:nn) Nvar2[x]=Nvar1[[x]][1]
+        for(x in 1:nn) Nvar2[x]<-Nvar1[[x]][1]
         #}  ## random factors
       
-      ff=row.names(wald(fm)) 
-      nf=length(ff)
-      ffa=ff[c(-1,-nf)] ## fixed factors
+      ff<-row.names(wald(fm)) 
+      nf<-length(ff)
+      ffa<-ff[c(-1,-nf)] ## fixed factors
       
-      vvN=nrow(Var)
+      vvN<-nrow(Var)
       for(jj in 1:vvN) {
-        mm1[i,jj]=round(Var[jj,2],4)
-        mm2[i,jj]=round(Var[jj,3],4)
+        mm1[i,jj]<-round(Var[jj,2],4)
+        mm2[i,jj]<-round(Var[jj,3],4)
       }
 
       if(!is.null(pformula)){
-        vv2=pin2(fm, pformula) #h2 ~ 4 * V1/(V1+V2)
-        H2[i]=round(vv2[1],3);H2.se[i]=round(vv2[2],3)
+        vv2<-pin2(fm, pformula) #h2 ~ 4 * V1/(V1+V2)
+        H2[i]<-round(vv2[1],3);H2.se[i]<-round(vv2[2],3)
       }
       if(!is.null(pformula1)){
-        vv3=pin2(fm, pformula1) 
-        H3[i]=round(vv3[1],3);H3.se[i]=round(vv3[2],3)
+        vv3<-pin2(fm, pformula1) 
+        H3[i]=<-round(vv3[1],3);H3.se[i]<-round(vv3[2],3)
       }
       if(!is.null(pformula2)){
         vv4=pin2(fm, pformula2) 
         H4[i]=round(vv4[1],3);H4.se[i]=round(vv4[2],3)
       }
       if(!is.null(pformula3)){
-        vv5=pin2(fm, pformula3) 
-        H5[i]=round(vv5[1],3);H5.se[i]=round(vv5[2],3)
+        vv5<-pin2(fm, pformula3) 
+        H5[i]<-round(vv5[1],3);H5.se[i]<-round(vv5[2],3)
       }
       if(!is.null(pformula4)){
-        vv6=pin2(fm, pformula4) 
-        H6[i]=round(vv6[1],3);H6.se[i]=round(vv6[2],3)
+        vv6<-pin2(fm, pformula4) 
+        H6[i]<-round(vv6[1],3);H6.se[i]<-round(vv6[2],3)
       }
-      RS[i]=fm$converge
-      RS2[i]=ncol(fm$monitor)-2
+      RS[i]<-fm$converge
+      RS2[i]<-ncol(fm$monitor)-2
     } 
   }
    
