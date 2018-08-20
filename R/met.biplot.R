@@ -6,7 +6,7 @@ met.biplot <-
     #arr<-summary(object)$varcomp$gamma[1:n] # fa loading, site n., 1(Psi) + fa n.
     gamma<-summary(object)$varcomp[1] 
     rownm<-row.names(gamma)
-    aimnm<-rownm[grep('fa',rownm)]
+    aimnm<-rownm[grep(':fa',rownm)]
     arr<-gamma[aimnm,]
     Xfam<-matrix(arr,siteN,(1+faN))
     
@@ -29,7 +29,7 @@ met.biplot <-
       
       bv<-coef(object)$random # here would be complexed!!
       alln<-row.names(bv)
-      aimn<-alln[grep('fa',alln)]
+      aimn<-alln[grep(':fa',alln)]
       Xfasln<-bv[aimn,]
       
       Xfa2<-matrix(Xfasln,nrow=VarietyN) # effects, row=Variety n., col=site n. + fa n.
