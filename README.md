@@ -193,8 +193,8 @@ met.plot(MET2)
 MET3<-MET[,c(1,9,2,4:7)] # add variable order on MET2: Rep, Block
 met.plot(MET3,"My met trials") 
 
-#MET$yield<-0.01*MET$yield
-summary(MET$yield)
+MET$yield<-0.01*MET$yield
+#summary(MET$yield)
 
 met2.asr<-asreml(yield~Loc, random=~ Genotype:fa(Loc,2), 
                 rcov=~ at(Loc):ar1(Col):ar1(Row), 
