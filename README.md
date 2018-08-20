@@ -196,6 +196,10 @@ met.plot(MET3,"My met trials")
 MET$yield<-0.01*MET$yield
 #summary(MET$yield)
 
+met1.asr<-asreml(yield~Loc, random=~ at(Loc):Rep + Genotype:fa(Loc,2), 
+                rcov=~ at(Loc):units, 
+                data=MET, maxiter=50)
+
 met2.asr<-asreml(yield~Loc, random=~ Genotype:fa(Loc,2), 
                 rcov=~ at(Loc):ar1(Col):ar1(Row), 
                 data=MET, maxiter=50)
@@ -205,15 +209,16 @@ met3.asr<-asreml(yield~Loc, random=~ Genotype:fa(Loc,3),
                 data=MET, maxiter=50,trace=F)
 
 ## count var/cov/corr matrix, etc.
-met.corr(met2.asr,site=MET$Loc,faN=2,kn=2)
-met.corr(met3.asr,site=MET$Loc,faN=3,kn=2) 
+met.corr(met1.asr, site=MET$Loc, faN=2, kn=2)
+met.corr(met2.asr, site=MET$Loc, faN=2, kn=2)
+met.corr(met3.asr, site=MET$Loc, faN=3, kn=2) 
 
 ## biplot asreml-met results
 
-met.biplot(met2.asr,siteN=6,VarietyN=36,faN=2)
-met.biplot(met3.asr,siteN=6,VarietyN=36,faN=3)
-met.biplot(met2.asr,siteN=6,VarietyN=36,faN=2,dSco.u=1.8,dLam.u=0.8)
-met.biplot(met2.asr,siteN=nlevels(MET$Loc),VarietyN=nlevels(MET$Genotype),faN=2) 
+met.biplot(met2.asr, siteN=6, VarietyN=36, faN=2)
+met.biplot(met3.asr, siteN=6, VarietyN=36, faN=3)
+met.biplot(met2.asr, siteN=6, VarietyN=36, faN=2, dSco.u=1.8, dLam.u=0.8)
+met.biplot(met2.asr, siteN=nlevels(MET$Loc), VarietyN=nlevels(MET$Genotype), faN=2) 
 # dLam.u -- least distance from center
 # dSco.u -- least score of Variety breeding value
 # if can not draw fig 3, try multiplying or being devided by 10 for aim trait data.
