@@ -43,7 +43,7 @@ function(object,site,faN=1,kn=NULL){ # ,faRS=1
   rownames(df)<-c(paste("S",levels(site),sep=''))
   colnames(df)<-c(paste("S",levels(site),sep=''))  
   
-  chcluster <- hclusterpar(na.omit(df), method="manhattan")
+  chcluster <- amap::hclusterpar(na.omit(df), method="manhattan")
   #windows(10,8)
   plot(chcluster, main="Fig.1 Cluster of different sites",hang=-1)  #  labels=F
   rect.hclust(chcluster, k=kn)
@@ -52,7 +52,7 @@ function(object,site,faN=1,kn=NULL){ # ,faRS=1
   
   if(n<16){
     #windows(10,8)
-    corrgram(df, type="cor",order=T, lower.panel=panel.pie,
+    corrgram::corrgram(df, type="cor",order=T, lower.panel=panel.pie,
                upper.panel=panel.conf, text.panel=panel.txt,
                main="Fig.2 Correlogram of different sites")
   }
