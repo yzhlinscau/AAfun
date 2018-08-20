@@ -24,7 +24,7 @@ y axis label
   \item{y.zero}{
 y axis tick from zero (0, default), or we can set least y axis tick.
 }
-\item{\alpha}{
+\item{alpha}{
 Significent levels, default is 0.05.
 }
   \item{\dots}{
