@@ -41,7 +41,7 @@ model.comp<-
     b2<-which.min(BIC)
     df$BIC.State<-""
     df[b2,7]<-"better"
-    df<-arrange(df,df$Npm)
+    df<-plyr::arrange(df,df$Npm)
     
     print(df)
     cat("-----------------------------\n")
@@ -59,7 +59,7 @@ model.comp<-
       cat("\nLikelihood ratio test (LRT) results:\n\n")
       for(i in 1:B){
         if(B>1)df1<-df[A[,i],1:4] else df1<-df[1:2,1:4]
-        df1<-arrange(df1,df1$Npm)
+        df1<-plyr::arrange(df1,df1$Npm)
         DlogL=df1$LogL[2]-df1$LogL[1]
         Ddf=df1$Npm[2]-df1$Npm[1]
         
@@ -74,7 +74,7 @@ model.comp<-
         df1$Sig.level<-c(0,siglevel)
         
         df1[1,5:6]<-""
-        df2<-arrange(df1,df1$Model)
+        df2<-plyr::arrange(df1,df1$Model)
         cat("\nModel compared between ",df2$Model[1],"--",df2$Model[2],":\n")
         print(df1)
         cat("---------------")
