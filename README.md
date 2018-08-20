@@ -181,7 +181,6 @@ model.comp(Nml=c(fm3a,fm3b,fm1a,fm1b,fm1),mulM=TRUE,LRT=TRUE)
 ##  met.plot(): plots MET data
 ##  met.corr(): calculate var/cov/corr from asreml MET factor analytic results
 ##  met.biplot(): biplots MET factor analytic results from asreml 
-##  met.biplot() works for just only fa() in random terms at present.
 
 data(MET)
 
@@ -206,8 +205,8 @@ met3.asr<-asreml(yield~Loc, random=~ Genotype:fa(Loc,3),
                 data=MET, maxiter=50,trace=F)
 
 ## count var/cov/corr matrix, etc.
-met.corr(met2.asr,site=MET$Loc,faN=2,kn=2,faRS=1)
-met.corr(met3.asr,site=MET$Loc,faN=3,kn=2,faRS=1) 
+met.corr(met2.asr,site=MET$Loc,faN=2,kn=2)
+met.corr(met3.asr,site=MET$Loc,faN=3,kn=2) 
 
 ## biplot asreml-met results
 
