@@ -1,8 +1,10 @@
 met.biplot <-
   function(object,siteN,VarietyN,faN,dSco.u=NULL,dLam.u=NULL,...){
+    # faRS=1
     par(mar=c(4,2,4.5,2))  
     n<-siteN*(1+faN)
     arr<-summary(object)$varcomp$gamma[1:n] # fa loading, site n., 1(Psi) + fa n.
+    #arr<-summary(object)$varcomp$gamma[faRS:(n+faRS-1)] 
     Xfam<-matrix(arr,siteN,(1+faN))
     
     fa.name<-paste("FA",1:faN,sep="")
@@ -22,7 +24,7 @@ met.biplot <-
     
     if(faN>1){
       
-      Xfasln<-coef(object)$random
+      Xfasln<-coef(object)$random # here would be complexed!!
       Xfa2<-matrix(Xfasln,nrow=VarietyN) # effects, Variety n., site n. + fa n.
       colN<-length(Xfasln)/VarietyN
       scores<-Xfa2[,-1:-(colN-faN)]
@@ -46,7 +48,7 @@ met.biplot <-
           #windows(18,8)
           par(mfrow=c(1,2))
           biplot(scores[,acb[,i]],Lam[,acb[,i]],cex=0.75,
-                 main=paste("Fig 2-",i, " biplot with all variety",sep=""))
+                 main=paste("Fig 2-",i, " biplot with all genotypes",sep=""))
           
           biplot(scores[dSco>dSco.u,acb[,i]],Lam[dLam>dLam.u,acb[,i]],cex=0.75,           
                  main=paste("Fig 3-",i, " biplot when dSco>",dSco.u,sep="")) # dSco>2
@@ -57,7 +59,7 @@ met.biplot <-
         #windows(18,8)
         par(mfrow=c(1,2))
         biplot(scores[,1:2],Lam[,1:2],cex=0.75,
-               main="Fig 2 biplot with all variety")
+               main="Fig 2 biplot with all genotypes")
         
         biplot(scores[dSco>dSco.u,1:2],Lam[dLam>dLam.u,1:2],cex=0.75,           
                main=paste("Fig 3 biplot when dSco>",dSco.u,sep="")) # dSco>2
