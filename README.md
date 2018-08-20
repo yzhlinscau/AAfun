@@ -1,7 +1,7 @@
 # AAfun
 ASReml-R Added functions
 
-# Attension: AAfun is now available and works for ASReml-R V3.0 or ASReml-R V4.0. The online version AAfun is only for ASReml-R V3.0. The new version AAfun4 works for ASReml-R V4.0, but not supplied online in present. If readers feel interesting in AAfun4, you can get the package AAfun4 by sending email to me (yzhlinscau@163.com).
+### Attension: AAfun is now available and works for ASReml-R V3.0 or ASReml-R V4.0. The online version AAfun is only for ASReml-R V3.0. The new version AAfun4 works for ASReml-R V4.0, but not supplied online in present. If readers feel interesting in AAfun4, you can get the package AAfun4 by sending email to me (yzhlinscau@163.com).
 
 ## INSTALL
 ``` r
@@ -14,6 +14,7 @@ devtools::install_github('yzhlinscau/AAfun')
 ``` r
 library(asreml)
 library(AAfun)
+demo('pin')
 ```
 ## DEMO data
 #### data1 with no pedigree
@@ -174,4 +175,48 @@ comparison among more than two models:
 model.comp(Nml=c(fm3a,fm3b,fm1a,fm1b,fm1),mulM=TRUE)
 model.comp(Nml=c(fm3a,fm3b,fm1a,fm1b,fm1),mulM=TRUE,LRT=TRUE)
 ```
+``` r
+##  met.plot(): plots MET data
+##  met.corr(): calculate var/cov/corr from asreml MET factor analytic results
+##  met.biplot(): biplots MET factor analytic results from asreml 
+##  met.biplot() works for just only fa() in random terms at present.
+
+data(MET)
+
+##  plot MET data -- example 1
+# variable order: genotype,yield,site,row,col
+MET2<-MET[,c(1,9,2,4:5)] 
+met.plot(MET2)  
+
+## plot MET data -- example 2
+MET3<-MET[,c(1,9,2,4:7)] # add variable order on MET2: Rep, Block
+met.plot(MET3,"My met trials") 
+
+#MET$yield<-0.01*MET$yield
+summary(MET$yield)
+
+met2.asr<-asreml(yield~Loc, random=~ Genotype:fa(Loc,2), 
+                rcov=~ at(Loc):ar1(Col):ar1(Row), 
+                data=MET, maxiter=50)
+
+met3.asr<-asreml(yield~Loc, random=~ Genotype:fa(Loc,3), 
+                rcov=~ at(Loc):ar1(Col):ar1(Row), 
+                data=MET, maxiter=50,trace=F)
+
+## count var/cov/corr matrix, etc.
+met.corr(met2.asr,site=MET$Loc,faN=2,kn=2,faRS=1)
+met.corr(met2.asr,MET$Loc,kn=2) 
+
+## biplot asreml-met results
+
+met.biplot(met2.asr,siteN=6,VarietyN=36,faN=2)
+met.biplot(met3.asr,siteN=6,VarietyN=36,faN=3)
+met.biplot(met2.asr,siteN=6,VarietyN=36,faN=2,dSco.u=1.8,dLam.u=0.8)
+met.biplot(met2.asr,siteN=nlevels(MET$Loc),VarietyN=nlevels(MET$Genotype),faN=2) 
+# dLam.u -- least distance from center
+# dSco.u -- least score of Variety breeding value
+# if can not draw fig 3, try multiplying or being devided by 10 for aim trait data.
+
+``` 
+
 ### More details will be updated in the future.
