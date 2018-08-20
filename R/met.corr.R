@@ -8,7 +8,7 @@ function(object,site,faN=1,kn=NULL){ # ,faRS=1
   
   varcomp<-summary(object)$varcomp[2]
   vcn<-row.names(varcomp)
-  aimn<-vcn[grep('fa',vcn)]
+  aimn<-vcn[grep(':fa',vcn)]
   varcomp1<-varcomp[aimn,]
   
   #vect1<-summary(object)$varcomp$component[faRS:(n+faRS-1)]
