@@ -60,7 +60,8 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
       if(ped==FALSE) fm<-asreml::asreml(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit, data=df1,trace=FALSE)
       if(ped==TRUE) {
         #fm<-asreml(fixed=FMod, random=RMod,maxit=maxit, ginverse=ginverse2, data=df1,trace=F)
-        fm<- do.call(asreml::asreml,list(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit,ginverse=ginverse, data=quote(df1),trace=FALSE))
+        fm<- do.call(asreml::asreml,list(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit,
+                                         ginverse=ginverse, data=quote(df1),trace=FALSE))
       }
       
       Var<-summary(fm)$varcomp
@@ -90,11 +91,11 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
       }
       if(!is.null(pformula1)){
         vv3<-pin2(fm, pformula1) 
-        H3[i]=<-round(vv3[1],3);H3.se[i]<-round(vv3[2],3)
+        H3[i]<-round(vv3[1],3);H3.se[i]<-round(vv3[2],3)
       }
       if(!is.null(pformula2)){
-        vv4=pin2(fm, pformula2) 
-        H4[i]=round(vv4[1],3);H4.se[i]=round(vv4[2],3)
+        vv4<-pin2(fm, pformula2) 
+        H4[i]<-round(vv4[1],3);H4.se[i]<-round(vv4[2],3)
       }
       if(!is.null(pformula3)){
         vv5<-pin2(fm, pformula3) 
@@ -110,66 +111,67 @@ asreml.batch <- function (data,factorN,traitN,FMod=NULL,RMod=NULL, EMod=NULL,
   }
    
   if(mulT==TRUE){
-    if(is.null(mulN)) mulN=2
+    if(is.null(mulN)) mulN<-2
     
-    if((ccN/mulN)>1) {bb=combn(cc,mulN);bbn=ncol(bb)}
-    if((ccN/mulN)==1){bb=cc;bbn=1}
+    if((ccN/mulN)>1) {bb<-combn(cc,mulN);bbn<-ncol(bb)}
+    if((ccN/mulN)==1){bb<-cc;bbn<-1}
     if((ccN/mulN<1)){cat("\nThe trait No is less than in the model!\n");break}
     
-    vvN=vector() #=NULL
+    vvN<-vector() #=NULL
     
     for(n in 1:bbn){
-      if((ccN/mulN)>1) df1=data[,c(aa,bb[,n])] else df1=data[,c(aa,bb)]
-      nn=length(df1)
+      if((ccN/mulN)>1) df1<-data[,c(aa,bb[,n])] else df1<-data[,c(aa,bb)]
+      nn<-length(df1)
       
-      if((ccN/mulN)>1) {NTrait[n]=paste(names(data)[bb[,n]],collapse="-") 
-                        names(df1)[(nn-mulN+1):nn]=paste("y",1:mulN,sep="")
-      }else {NTrait[n]=paste(names(data)[bb],collapse="-")
-                       names(df1)[(nn-mulN+1):nn]=paste("y",1:mulN,sep="")
+      if((ccN/mulN)>1) {NTrait[n]<-paste(names(data)[bb[,n]],collapse="-") 
+                        names(df1)[(nn-mulN+1):nn]<-paste("y",1:mulN,sep="")
+      }else {NTrait[n]<-paste(names(data)[bb],collapse="-")
+                       names(df1)[(nn-mulN+1):nn]<-paste("y",1:mulN,sep="")
       }
       
-      if(ped==FALSE) fm<-asreml(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit, data=df1,trace=FALSE)
+      if(ped==FALSE) fm<-asreml::asreml(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit, data=df1,trace=FALSE)
       if(ped==TRUE) {
-        fm<- do.call(asreml,list(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit,ginverse=ginverse, data=quote(df1),trace=FALSE))
+        fm<- do.call(asreml::asreml,list(fixed=FMod, random=RMod,rcov=EMod,maxit=maxit,
+                                         ginverse=ginverse, data=quote(df1),trace=FALSE))
         }
       
-      Var=summary(fm)$varcomp
+      Var<-summary(fm)$varcomp
       
-      Nvar=row.names(Var)
-      vvN=nrow(Var)
-      dd=0.5*mulN*(mulN+1)
+      Nvar<-row.names(Var)
+      vvN<-nrow(Var)
+      dd<-0.5*mulN*(mulN+1)
       
-      Nvar1=strsplit(Nvar,"!")
-      for(x in 1:length(Nvar1)) Nvar2[x]=Nvar1[[x]][1]  ## random factors
+      Nvar1<-strsplit(Nvar,"!")
+      for(x in 1:length(Nvar1)) Nvar2[x]<-Nvar1[[x]][1]  ## random factors
       
       if(corM==FALSE){
-        Nvar3=sub("R!trait","R",Nvar)
-        Nvar3=sub("!trait","",Nvar3)
-        Nvar3=sub("trait:","",Nvar3)
-        Nvar3=sub("R!variance",NA,Nvar3)
-        Nvar3=na.omit(Nvar3)
+        Nvar3<-sub("R!trait","R",Nvar)
+        Nvar3<-sub("!trait","",Nvar3)
+        Nvar3<-sub("trait:","",Nvar3)
+        Nvar3<-sub("R!variance",NA,Nvar3)
+        Nvar3<-na.omit(Nvar3)
       }else{
-        Nvar3=sub("R!trait","R",Nvar)
-        Nvar3=sub("!trait","",Nvar3)
-        Nvar3=sub(":!trait","",Nvar3)
-        Nvar3=sub("trait:","",Nvar3)
-        Nvar3=sub("R!variance",NA,Nvar3)
-        Nvar3=na.omit(Nvar3)
+        Nvar3<-sub("R!trait","R",Nvar)
+        Nvar3<-sub("!trait","",Nvar3)
+        Nvar3<-sub(":!trait","",Nvar3)
+        Nvar3<-sub("trait:","",Nvar3)
+        Nvar3<-sub("R!variance",NA,Nvar3)
+        Nvar3<-na.omit(Nvar3)
       }
       
-      ff=row.names(wald(fm)) 
-      nf=length(ff)
-      ffa=ff[c(-1,-nf)] ## fixed factors
+      ff<-row.names(wald(fm)) 
+      nf<-length(ff)
+      ffa<-ff[c(-1,-nf)] ## fixed factors
       
       for(jj in 1:vvN) {
-        mm1[n,jj]=round(Var[jj,2],4) # var
-        mm2[n,jj]=round(Var[jj,3],4) # se
+        mm1[n,jj]<-round(Var[jj,2],4) # var
+        mm2[n,jj]<-round(Var[jj,3],4) # se
       }
       
       ## just only gcorr or add parameter -- sigFormula
       #if(is.null(sigFormula)) ARV=pin2(fm, rg~V2/sqrt(V1 * V3)) else ARV=pin2(fm, sigFormula)
-      ARV=pin2(fm, rg~V2/sqrt(V1 * V3))
-      RV[n]=round(ARV[1],3);RV.se[n]=round(ARV[2],3)
+      ARV<-pin2(fm, rg~V2/sqrt(V1 * V3))
+      RV[n]<-round(ARV[1],3);RV.se[n]<-round(ARV[2],3)
       
       if(!is.null(pformula)){
         vv2=pin2(fm, pformula) #h2 ~ 4 * V1/(V1+V2)
