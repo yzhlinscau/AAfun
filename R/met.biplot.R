@@ -3,8 +3,11 @@ met.biplot <-
     # faRS=1
     par(mar=c(4,2,4.5,2))  
     n<-siteN*(1+faN)
-    arr<-summary(object)$varcomp$gamma[1:n] # fa loading, site n., 1(Psi) + fa n.
-    #arr<-summary(object)$varcomp$gamma[faRS:(n+faRS-1)] 
+    #arr<-summary(object)$varcomp$gamma[1:n] # fa loading, site n., 1(Psi) + fa n.
+    gamma<-summary(object)$varcomp[1] 
+    rownm<-row.names(gamma)
+    aimnm<-rownm[grep('fa',rownm)]
+    arr<-gamma[aimnm,]
     Xfam<-matrix(arr,siteN,(1+faN))
     
     fa.name<-paste("FA",1:faN,sep="")
@@ -24,8 +27,12 @@ met.biplot <-
     
     if(faN>1){
       
-      Xfasln<-coef(object)$random # here would be complexed!!
-      Xfa2<-matrix(Xfasln,nrow=VarietyN) # effects, Variety n., site n. + fa n.
+      bv<-coef(object)$random # here would be complexed!!
+      alln<-row.names(bv)
+      aimn<-alln[grep('fa',alln)]
+      Xfasln<-bv[aimn,]
+      
+      Xfa2<-matrix(Xfasln,nrow=VarietyN) # effects, row=Variety n., col=site n. + fa n.
       colN<-length(Xfasln)/VarietyN
       scores<-Xfa2[,-1:-(colN-faN)]
       dimnames(scores)<-list(paste("V",1:VarietyN,sep=""),paste("Fa",1:faN,sep=""))
