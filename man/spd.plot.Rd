@@ -38,7 +38,7 @@ Transform NA to 0(na=0) or keep NA (default)
   \item{color.p}{
 Parameters of the colors for figures
 }
-  \item{\mtitle}{
+  \item{mtitle}{
 Figure title
 }
 }
