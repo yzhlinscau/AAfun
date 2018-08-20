@@ -207,7 +207,7 @@ met3.asr<-asreml(yield~Loc, random=~ Genotype:fa(Loc,3),
 
 ## count var/cov/corr matrix, etc.
 met.corr(met2.asr,site=MET$Loc,faN=2,kn=2,faRS=1)
-met.corr(met2.asr,MET$Loc,kn=2) 
+met.corr(met3.asr,site=MET$Loc,faN=3,kn=2,faRS=1) 
 
 ## biplot asreml-met results
 
