@@ -28,18 +28,18 @@ devtools::install_github('yzhlinscau/AAfun')
 ## DEMO functions
 ``` r
 library(asreml)
-library(AAfun  
+library(AAfun)  
 demo('pin')
 ```
 ## DEMO data
 #### data1 with no pedigree
 ``` r
-data(PrSpa)
+data(PrSpa,package='AAfun')
 df<-PrSpa
 ```
 #### data2 with pedigree
 ``` r
-data(dfm2)
+data(dfm2,package='AAfun')
 df2<-dfm2
 ``` 
 ## function 1 pin():calculate se for h2 or corr
@@ -51,7 +51,7 @@ summary(fm)$varcomp[,1:3]
 ``` 
 calculate heritability:
 ``` r
-pin(fm, h2 ~4*V1/(V1+V2),signif=T) 
+AAfun::pin(fm, h2 ~4*V1/(V1+V2),signif=T) 
 ``` 
 ##### exmaple 1.2 for us model for bi-trait
 ``` r
@@ -95,7 +95,7 @@ pin() also works for data with pedigree files.
 #### exmaple 2.1 for sigle trait model
 ``` r
 df1=subset(df,Spacing==3)
-asreml.batch(data=df1,factorN=1:5,traitN=c(9:13),
+AAfun::asreml.batch(data=df1,factorN=1:5,traitN=c(9:13),
              FMod=y~1+Rep+Plot,RMod=~Fam,
              pformula=h2 ~ 4 * V1/(V1+V2))
 ```
@@ -180,7 +180,7 @@ fm3b<-asreml(cbind(dj,h3,h5)~ trait+trait:Rep,
 ```
 comparison between two models:
 ``` r
-model.comp(m1=fm1a,m2=fm1b)
+AAfun::model.comp(m1=fm1a,m2=fm1b)
 model.comp(m1=fm1a,m2=fm1b,LRT=TRUE)
 model.comp(m1=fm1a,m2=fm1b,LRT=TRUE,rdDF=TRUE)
 ```
@@ -196,12 +196,12 @@ model.comp(Nml=c(fm3a,fm3b,fm1a,fm1b,fm1),mulM=TRUE,LRT=TRUE)
 ##  met.corr(): calculate var/cov/corr from asreml MET factor analytic results
 ##  met.biplot(): biplots MET factor analytic results from asreml 
 
-data(MET)
+data(MET,package='AAfun')
 
 ##  plot MET data -- example 1
 # variable order: genotype,yield,site,row,col
 MET2<-MET[,c(1,9,2,4:5)] 
-met.plot(MET2)  
+AAfun::met.plot(MET2)  
 
 ## plot MET data -- example 2
 MET3<-MET[,c(1,9,2,4:7)] # add variable order on MET2: Rep, Block
@@ -223,13 +223,13 @@ met3.asr<-asreml(yield~Loc, random=~ Genotype:fa(Loc,3),
                 data=MET, maxiter=50,trace=F)
 
 ## count var/cov/corr matrix, etc.
-met.corr(met1.asr, site=MET$Loc, faN=2, kn=2)
+AAfun::met.corr(met1.asr, site=MET$Loc, faN=2, kn=2)
 met.corr(met2.asr, site=MET$Loc, faN=2, kn=2)
 met.corr(met3.asr, site=MET$Loc, faN=3, kn=2) 
 
 ## biplot asreml-met results
 
-met.biplot(met2.asr, siteN=6, VarietyN=36, faN=2)
+AAfun::met.biplot(met2.asr, siteN=6, VarietyN=36, faN=2)
 met.biplot(met3.asr, siteN=6, VarietyN=36, faN=3)
 met.biplot(met2.asr, siteN=6, VarietyN=36, faN=2, dSco.u=1.8, dLam.u=0.8)
 met.biplot(met2.asr, siteN=nlevels(MET$Loc), VarietyN=nlevels(MET$Genotype), faN=2) 
