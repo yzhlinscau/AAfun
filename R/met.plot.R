@@ -12,10 +12,10 @@ function(object,plot.title=NULL,...){
   #windows(10,8)
   # desplot(yield~ col*row|site, dat, main=plot.title)
   if(length(dat)==5){  
-    desplot(yield~ col*row|site, dat, main=plot.title)
+    desplot::desplot(yield~ col*row|site, dat, main=plot.title)
     }else{    
       names(dat)[6:7]<-c("Rep","Blk")  
-      desplot(yield ~ col*row|site, dat, main=plot.title,
+      desplot::desplot(yield ~ col*row|site, dat, main=plot.title,
           out1=Rep, out2=Blk,strip.cex=1.5,
           out1.gpar=gpar(col="blue", lwd=4),
           out2.gpar=gpar(col="red", lwd=1, lty=1),
