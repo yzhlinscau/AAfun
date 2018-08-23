@@ -8,7 +8,7 @@ asreml-MET corr matrix
 This function calculate var/cov/corr from asreml MET factor analytic results to further research the relation of trial sites.
 }
 \usage{
-met.corr(object, site, faN=1,kn = NULL)
+met.corr(object, site, faN=1,kn = NULL,plot=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,7 +24,9 @@ Factor numbers, 1(default)
   \item{kn}{
 Site cluster group numbers, 3(default)
 }
-
+  \item{plot}{
+Output cluster figure, TRUE(default)
+}
 }
 
 \value{
@@ -33,7 +35,8 @@ Site cluster group numbers, 3(default)
   \item{object }{Asreml factor analytic results for MET, met.asr}
   \item{site }{variable site of data, MET$Site}
   \item{faN }{factor numbers,1(default)}
-  \item{kn }{cluster group numbers,3}
+  \item{kn }{cluster group numbers,3(default)}
+  \item{faN }{logical value,TRUE(default)}
 %% ...
 }
 \author{
