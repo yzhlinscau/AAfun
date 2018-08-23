@@ -12,6 +12,7 @@ Imports:
     amap,
     agricolae,
     agridat,
+    desplot,
     dplyr,
     ggplot2,
     gplots,
