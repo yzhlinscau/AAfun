@@ -7,7 +7,7 @@ Author: Yuanzhen Lin <yzhlinscau@163.com>
 Maintainer: Yuanzhen Lin <yzhlinscau@163.com>
 Description: This package adds some functions added to asreml and MCMCglmm packages, functions including: asreml.batch() and snp.batch() to carry out batch analysis in ASReml-R,pin() to count heritability or corr with se and output significent level for corr value, Ginv() to generate G inverse matrix for GBLUP, model.comp() to compare models with different randomed factors for asrmel, spd.plot() and met.plot() to plot spatial and MET data, met.corr() to calculate var/cov/corr matrix for MET analysis,dial.combn() to generate recipro and family code, mc.ped() to change Pedigree format from asreml to MCMCglmm, mc.se()to count standard error(se) for heritability or corr(...) in MCMCglmm, ir2r.sp() to transform irregular spatial data to regular data,  and depack() to unload one pack age and its dependicies.
 Depends:
-    R (>= 3.2.1)
+    R (>= 3.3.0)
 Imports:
     amap,
     agricolae,
