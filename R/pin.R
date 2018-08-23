@@ -5,15 +5,15 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL,asrV=3){
   
   if(!is.null(formula)){
     transform<-formula
-    #if(is.null(N)) N<-0
     #ifelse(asrV==4,pframe <- as.list(object$vparameters),
            pframe <- as.list(object$gammas)#)
     names(pframe) <- paste("V", seq(1, length(pframe)), sep = "")
     tvalue<-eval(deriv(transform[[length(transform)]], names(pframe)),pframe)
-    # X <- as.vector(attr(tvalue, "gradient"))
-    # if(asrV==3) X[object$gammas.type == 1] <- 0
+    X <- as.vector(attr(tvalue, "gradient"))
+    # if(asrV==3) 
+    X[object$gammas.type == 1] <- 0
     #ifelse(asrV==4,X[object$vparameters.type == 1] <- 0,X[object$gammas.type == 1] <- 0)
-    X <- matrix(as.vector(attr(tvalue, "gradient")), ncol = 1)
+    # X <- matrix(as.vector(attr(tvalue, "gradient")), ncol = 1)
     
     # tname <- if(length(transform)==3){transform[[2]]}else ""
     tname <- if (length(transform) == 3) transform[[2]] else deparse(transform[[2]])
