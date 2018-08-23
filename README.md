@@ -52,6 +52,9 @@ summary(fm)$varcomp[,1:3]
 calculate heritability:
 ``` r
 AAfun::pin(fm, h2 ~4*V1/(V1+V2),signif=T) 
+## 
+##    Estimate      SE
+## h2    0.306   0.124
 ``` 
 ##### exmaple 1.2 for us model for bi-trait
 ``` r
@@ -64,12 +67,20 @@ summary(fm2)$varcomp[,1:3]
 calculate heritability for both traits:
 ``` r
 pin(fm2, h2_A ~ 4 * V1/(V1+V5)) 
+## 
+##      Estimate      SE
+## h2_A    0.455   0.145
 
 pin(fm2, h2_B ~ 4 * V3/(V3+V7)) 
 ``` 
 calculate genetic and phenotypic corr between traits:
 ``` r
 pin(fm2, gCORR ~ V2/sqrt(V1*V3),signif=TRUE) 
+## 
+##       Estimate      SE sig.level
+## gCORR    0.442   0.257         *
+## ---------------
+## Sig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1
 
 pin(fm2, pCORR ~ (V2+V6)/sqrt((V1+V5)*(V3+V7)),signif=TRUE) 
 ``` 
@@ -84,6 +95,13 @@ summary(fm3)$varcomp[,1:3]
 return corr results:
 ``` r
 pin(fm3,corN=3) 
+## 
+##                                  Estimate    SE sig.level
+## trait:Fam!trait.h3:!trait.dj.cor    0.751 0.233       ***
+## trait:Fam!trait.h5:!trait.dj.cor    0.448 0.257         *
+## trait:Fam!trait.h5:!trait.h3.cor    0.798 0.123       ***
+## ---------------
+## Sig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1
 ```
 just return the first corr:
 ``` r
@@ -95,9 +113,27 @@ pin() also works for data with pedigree files.
 #### exmaple 2.1 for sigle trait model
 ``` r
 df1=subset(df,Spacing==3)
-AAfun::asreml.batch(data=df1,factorN=1:5,traitN=c(9:13),
+AAfun::asreml.batch(data=df1,factorN=1:5,traitN=c(6:13),
              FMod=y~1+Rep+Plot,RMod=~Fam,
              pformula=h2 ~ 4 * V1/(V1+V2))
+
+## 
+## ASReml-R batch analysis results:
+## Fixed Factors -- Rep 
+## Randomed Factors -- Fam R 
+## Index formula -- h2 ~ 4 * V1/(V1 + V2)
+## 
+## Variance order: Fam, R
+##   Trait       V1       V2    V1.se    V2.se    h2 h2.se Converge Maxit
+## 1    dj   0.0001 5.00e-04   0.0000   0.0000 0.447 0.144     TRUE     6
+## 2    dm   0.0001 2.00e-03   0.0001   0.0001 0.266 0.122     TRUE     6
+## 3    wd   0.0001 6.00e-04   0.0000   0.0000 0.475 0.151     TRUE     6
+## 4    h1  12.0487 4.31e+01   3.1499   2.7194 0.875 0.187     TRUE     7
+## 5    h2  54.2123 6.21e+02  22.4845  39.1922 0.321 0.127     TRUE     6
+## 6    h3 132.5869 1.59e+03  56.4592 100.2910 0.308 0.125     TRUE     6
+## 7    h4 241.3909 3.60e+03 115.5059 227.5395 0.251 0.116     TRUE     6
+## 8    h5 441.9941 5.33e+03 187.1784 337.2136 0.306 0.124     TRUE     6
+             
 ```
 #### exmaple 2.2 for us model
 ``` r
@@ -182,7 +218,34 @@ comparison between two models:
 ``` r
 AAfun::model.comp(m1=fm1a,m2=fm1b)
 model.comp(m1=fm1a,m2=fm1b,LRT=TRUE)
+
 model.comp(m1=fm1a,m2=fm1b,LRT=TRUE,rdDF=TRUE)
+## 
+## Attension:
+## Fixed factors should be the same!
+## 
+##   Model LogL Npm  AIC  AIC.State 
+## 1  fm1b -868   6 1749              
+## 2  fm1a -867   7 1748     better          
+## -----------------------------
+## Lower AIC is better model.
+## 
+## Attension: Please check every asreml results' length is 43;
+## if the length < 43, put the object at the end of Nml.
+## In the present, just allow one object's length < 43.
+## =====================================
+## Likelihood ratio test (LRT) results:
+## 
+## Model compared between  fm2a -- fm2b :
+##   Model LogL Npm  AIC Pr(>F) Sig.level
+## 1  fm1b -868   6 1749                 
+## 2  fm1a -867   7 1748  0.038         *
+## ---------------
+## Sig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1
+## =====================================
+## Attension: Ddf=Ddf-0.5. 
+## When for corr model, against +/-1. 
+
 ```
 comparison among more than two models:
 ``` r
@@ -223,8 +286,23 @@ met3.asr<-asreml(yield~Loc, random=~ Genotype:fa(Loc,3),
                 data=MET, maxiter=50,trace=F)
 
 ## count var/cov/corr matrix, etc.
-AAfun::met.corr(met1.asr, site=MET$Loc, faN=2, kn=2)
-met.corr(met2.asr, site=MET$Loc, faN=2, kn=2)
+
+AAfun::met.corr(met2.asr, site=MET$Loc, faN=2, kn=2)
+## 
+## Site cluster results:
+## S1 S2 S3 S4 S5 S6 
+##  1  1  1  2  1  2 
+## 
+## Cov\Var\Corr matrix
+##      S1    S2     S3    S4    S5     S6
+## S1 5.38 0.816  0.875 0.520 0.979  0.130
+## S2 3.90 4.246  0.688 0.472 0.811  0.161
+## S3 4.97 3.469  5.988 0.042 0.759 -0.366
+## S4 2.84 2.288  0.243 5.535 0.682  0.914
+## S5 4.31 3.169  3.525 3.044 3.598  0.328
+## S6 0.32 0.353 -0.954 2.291 0.662  1.135
+
+met.corr(met1.asr, site=MET$Loc, faN=2, kn=2)
 met.corr(met3.asr, site=MET$Loc, faN=3, kn=2) 
 
 ## biplot asreml-met results
