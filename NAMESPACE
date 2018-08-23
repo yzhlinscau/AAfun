@@ -1,5 +1,5 @@
-import(amap,agricolae,agridat,
-#corrgram,
+import(amap,agricolae,desplot,
+#corrgram,agradit,
 ggplot2,gplots,grid,
 MASS,Matrix,MCMCglmm,nadiv,reshape2,sqldf,plyr
 )
