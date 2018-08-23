@@ -210,7 +210,7 @@ met.plot(MET3,"My met trials")
 MET$yield<-0.01*MET$yield
 #summary(MET$yield)
 
-met1.asr<-asreml(yield~Loc, random=~ at(Loc):Rep + Genotype:fa(Loc,2), 
+met1.asr<-asreml(yield~Loc, random=~ diag(Loc):Rep + Genotype:fa(Loc,2), 
                 rcov=~ at(Loc):units, 
                 data=MET, maxiter=50)
 
