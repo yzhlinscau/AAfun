@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/58902686.svg)](https://zenodo.org/badge/latestdoi/58902686)
+
 # AAfun manual
 ASReml-R Added functions
 
