@@ -4,10 +4,10 @@ met.biplot <-
     par(mar=c(4,2,4.5,2))  
     n<-siteN*(1+faN)
     #arr<-summary(object)$varcomp$gamma[1:n] # fa loading, site n., 1(Psi) + fa n.
-    gamma<-summary(object)$varcomp[1] 
-    rownm<-row.names(gamma)
+    component<-summary(object)$varcomp['component'] 
+    rownm<-row.names(component)
     aimnm<-rownm[grep('fa\\(.*,.*\\)',rownm)]
-    arr<-gamma[aimnm,]
+    arr<-component[aimnm,]
     Xfam<-matrix(arr,siteN,(1+faN))
     
     fa.name<-paste("FA",1:faN,sep="")
