@@ -6,9 +6,9 @@ function(object,site,faN=1,kn=NULL,plot=TRUE){ # ,faRS=1
   if(is.null(kn)) kn=3
   n<-nlevels(site)
   
-  varcomp<-summary(object)$varcomp[2]
+  varcomp<-summary(object)$varcomp['component']
   vcn<-row.names(varcomp)
-  aimn<-vcn[grep(':fa',vcn)]
+  aimn<-vcn[grep('fa\\(.*,.*\\)',vcn)]
   varcomp1<-varcomp[aimn,]
   
   #vect1<-summary(object)$varcomp$component[faRS:(n+faRS-1)]
