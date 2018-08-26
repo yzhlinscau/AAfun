@@ -36,7 +36,7 @@ Output cluster figure, TRUE(default)
   \item{site }{variable site of data, MET$Site}
   \item{faN }{factor numbers,1(default)}
   \item{kn }{cluster group numbers,3(default)}
-  \item{faN }{logical value,TRUE(default)}
+  \item{plot }{logical value,TRUE(default)}
 %% ...
 }
 \author{
