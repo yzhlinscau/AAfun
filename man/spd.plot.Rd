@@ -84,18 +84,6 @@ plot(variogram(barley1.asr),main="M1")
 aa=variogram(barley1.asr)
 spd.plot(aa,type="variogram",color.p=topo.colors)
 
-######## example 2 plot spatial data with NA's
-data(ir.sp)
-
-ir.sp2<-ir.sp[,5:16] # order: Row,Col,h05,cw05,...
-#ir.sp2<-subset(ir.sp,select=c(Row,Col,h05,cw05))
-
-sp1<-ir2r.sp(ir.sp2,row.max=10,col.max=20)
-
-aim.trait=subset(sp1,select=c(Row,Col,d10))
-spd.plot(aim.trait,key.unit="cm")
-spd.plot(aim.trait,color.p=topo.colors,na=0)
-spd.plot(aim.trait,na=0,x.unit=3)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
