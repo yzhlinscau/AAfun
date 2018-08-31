@@ -1,16 +1,15 @@
 import(amap,agricolae,desplot,
-#corrgram,agradit,
 ggplot2,gplots,grid,
-MASS,Matrix,MCMCglmm,nadiv,reshape2,sqldf,plyr
+MASS,Matrix,MCMCglmm,nadiv,reshape2,plyr
 )
 
 export(asreml.batch)
 export(dial.combn)
-export(depack)
+#export(depack)
 #export(corrgram2)
 #export(Ginv)
 export(group.plot)
-export(ir2r.sp)
+#export(ir2r.sp)
 #export(makeA1)
 export(mc.se)
 export(mc.ped)
