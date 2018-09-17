@@ -7,7 +7,7 @@ ASReml-R Added functions
 
 ## About AAfun
 
-The breedRPlus is builded on the base of package `'asreml'` for some additional functions, such as calculating standard error (se), running batch analysis, getting cov/var/corr matrix for FA models, etc. 
+The AAfun is builded on the base of package `'asreml'` for some additional functions, such as calculating standard error (se), running batch analysis, getting cov/var/corr matrix for FA models, etc. 
 
 ## INSTALL package
 ``` r
