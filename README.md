@@ -11,7 +11,7 @@ The AAfun is builded on the base of package `'asreml'` for some additional funct
 
 ## INSTALL package
 ``` r
-install.packages(c('amap',"agricolae","agridat","grid",'ggplot2',"gplots",
+install.packages(c('amap',"agricolae","agridat",'ggplot2',"gplots",
 "devtools","desplot","MCMCglmm",'nadiv',"plyr","reshape2","sqldf"))
 
 devtools::install_github('yzhlinscau/AAfun')
