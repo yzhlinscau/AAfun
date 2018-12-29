@@ -1,6 +1,6 @@
 met.plot <-
 function(object,plot.title=NULL,...){
-  #require(agridat)
+  #require(desplot) # V1.4
   #require(grid)
   #require(reshape2)
   
@@ -17,8 +17,8 @@ function(object,plot.title=NULL,...){
       names(dat)[6:7]<-c("Rep","Blk")  
       desplot::desplot(yield ~ col*row|site, dat, main=plot.title,
           out1=Rep, out2=Blk,strip.cex=1.5,
-          out1.gpar=gpar(col="blue", lwd=4),
-          out2.gpar=gpar(col="red", lwd=1, lty=1),
+          out1.gpar=list(col="blue", lwd=4),
+          out2.gpar=list(col="red", lwd=1, lty=1),
           par.settings = list(layout.heights=list(strip=2)))
   }
   #windows(10,8)
