@@ -5,28 +5,20 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL,asrV=3){
   
   if(!is.null(formula)){
     transform<-formula
-    #ifelse(asrV==4,pframe <- as.list(object$vparameters),
-           pframe <- as.list(object$gammas)#)
+    pframe <- as.list(object$gammas)
     names(pframe) <- paste("V", seq(1, length(pframe)), sep = "")
     tvalue<-eval(deriv(transform[[length(transform)]], names(pframe)),pframe)
-    X <- as.vector(attr(tvalue, "gradient"))
-    # if(asrV==3) 
+    X <- as.vector(attr(tvalue, "gradient")) 
     X[object$gammas.type == 1] <- 0
-    #ifelse(asrV==4,X[object$vparameters.type == 1] <- 0,X[object$gammas.type == 1] <- 0)
-    # X <- matrix(as.vector(attr(tvalue, "gradient")), ncol = 1)
-    
-    # tname <- if(length(transform)==3){transform[[2]]}else ""
     tname <- if (length(transform) == 3) transform[[2]] else deparse(transform[[2]])
     
-    #if(asrV==4) se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
-    #else{
       n <- length(pframe)
       i <- rep(1:n, 1:n)
       j <- sequence(1:n)
       k <- 1 + (i > j)
       Vmat <- object$ai
       se <- sqrt(sum(Vmat * X[i] * X[j] * k))
-    #}
+
 
     vv=vector() #<-NULL
     vv[1]=tvalue;vv[2]=se
@@ -55,10 +47,7 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL,asrV=3){
     df<-summary(object)$varcomp
     if(asrV==3){tvalue<-as.vector(df[1:n,2])
                 se<-as.vector(df[1:n,3])
-    }#else{
-    #  tvalue<-as.vector(df[1:n,1])
-    #  se<-as.vector(df[1:n,2])
-    #}
+
     tname<-rownames(summary(object)$varcomp)[1:n]    
     siglevel<-sig.level(tvalue,se)
     
@@ -71,34 +60,6 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL,asrV=3){
 
 # ----------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
-vpredict2=function (object, xform,signif=FALSE) 
-{
-  #options(digits=3)
-  if (!inherits(object, "asreml")) 
-    stop("Argument must be an asreml object")
-  pframe <- as.list(object$vparameters)
-  names(pframe) <- paste("V", seq(1, length(pframe)), sep = "")
-  tvalue <- eval(deriv(xform[[length(xform)]], names(pframe)), 
-                 pframe)
-  X <- matrix(as.vector(attr(tvalue, "gradient")), ncol = 1)
-  tname <- if (length(xform) == 3) xform[[2]] else deparse(xform[[2]])
-  se <- as.vector(sqrt(t(X) %*% object$ai %*% X))
-  result<-data.frame(row.names = tname, Estimate = tvalue, SE = se)
-  
-  result1<-result
-  result1$sig.level<-sig.level(tvalue,se)
-  
-  cat("\n")
-  if(signif==TRUE){ 
-    print(result1)
-    cat("---------------")
-    cat("\nSig.level: 0'***' 0.001 '**' 0.01 '*' 0.05 'Not signif' 1\n")    
-  }else{
-    print(result)
-  }
-  cat("\n")
-
-}
 
 # sig.level functions
 
