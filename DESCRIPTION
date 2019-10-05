@@ -21,7 +21,7 @@ Imports:
     MCMCglmm,
     plyr,
     reshape2
-Enhances: asreml
+# Enhances: asreml
 License: GPL-3
 LazyData: no
 Repository: CRAN
