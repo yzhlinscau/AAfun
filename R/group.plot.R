@@ -8,8 +8,8 @@ function(object,x.lbls,y.lbls=NULL,y.zero=NULL, ...){
    
    if(is.null(y.zero)) y.zero=0
   
-   trt<-row.names(object$groups) 
-   object$groups2<-arrange(object$groups,trt)
+   trt<-row.names(object$means) 
+   object$groups2<-object$groups[trt,]
    lbls<-object$groups2[,2]
    #lbls<-toupper(lbls) # tolower()
    if(is.null(y.lbls)) y.lbls<-names(object$means[1])   
