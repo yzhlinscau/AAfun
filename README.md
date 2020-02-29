@@ -3,7 +3,7 @@
 # AAfun manual
 ASReml-R Added functions
 
-##### Attension: AAfun is now available and works for ASReml-R V3.0 or ASReml-R V4.1. The online version AAfun is only for ASReml-R V3.0. The new version AAfun4 works for ASReml-R V4.1, but not supplied online. AAfun4 is not free any more, user should pay RMB $300 or US $30 for it. If readers feel interesting in AAfun4, you can send email to me (yzhlinscau@163.com).
+##### Attension: AAfun is now available and works for ASReml-R V3.0 or ASReml-R V4.1. The online version AAfun is only for ASReml-R V3.0. The new version AAfun4 works for ASReml-R V4.1, but not supplied online any more because of my not paying the fee for ASreml.
 
 ## About AAfun
 
