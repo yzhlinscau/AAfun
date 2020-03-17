@@ -1,3 +1,4 @@
+#' @export
 met.biplot <-
   function(object,siteN,VarietyN,faN,dSco.u=NULL,dLam.u=NULL,...){
     # faRS=1
