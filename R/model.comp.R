@@ -1,3 +1,4 @@
+#' @export
 model.comp<-
   function(m1=NULL,m2=NULL,Nml=NULL,mulM=NULL,LRT=NULL,rdDF=NULL){
     #library(plyr)
