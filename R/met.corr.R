@@ -1,3 +1,4 @@
+#' @export
 met.corr <-
 function(object,site,faN=1,kn=NULL,plot=TRUE){ # ,faRS=1
   #require(amap)
