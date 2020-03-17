@@ -1,3 +1,4 @@
+#' @export
 spd.plot<-
 function(object,type="data",p.lbls=NULL,key.unit=NULL,   
              x.unit=NULL,y.unit=NULL,na=NULL,
