@@ -1,3 +1,4 @@
+#' @export
 met.plot <-
 function(object,plot.title=NULL,...){
   #require(desplot) # V1.4
