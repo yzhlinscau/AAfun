@@ -58,37 +58,8 @@ function(object, formula=NULL,signif=NULL, corN=NULL,Rdf=NULL,asrV=3){
   }
 }
 
-# ----------------------------------------------------------------------------
-# ----------------------------------------------------------------------------
 
-# sig.level functions
 
-sig.level<-function(tvalue,se,...){
-  n<-length(se)
-  siglevel<-1:n
-  for(i in 1:n){    
-    sig.se<-c(se[i]*1.450,se[i]*2.326,se[i]*3.090)  
-    
-    if(abs(tvalue[i])>sig.se[3]) {siglevel[i]<-"***"}
-     else if(abs(tvalue[i])>sig.se[2]) {siglevel[i]<-"**"}
-     else if(abs(tvalue[i])>sig.se[1]) {siglevel[i]<-"*"}
-     else {siglevel[i]<-"Not signif"}
-  }
-  siglevel
-}
-
-sig.level2=function(x){
-  tt=vector() #=NULL
-  n=length(x)
-  for(i in 1:n){
-    if(abs(x[i])<0.001) tt[i]='***'
-    else if(abs(x[i])<0.01) tt[i]='**'
-    else if(abs(x[i])<0.05) tt[i]='*'
-    else if(abs(x[i])<0.10) tt[i]='.' 
-    else tt[i]=''
-  }
-  return(tt)
-}
 
 # ----------------------------------------------------------------------------
 # other functions for chapter 6
