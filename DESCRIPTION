@@ -14,11 +14,7 @@ Imports:
     desplot,
     dplyr,
     ggplot2,
-    gplots,
     grid,
-    MASS,
-    Matrix,
-    MCMCglmm,
     plyr,
     reshape2
 # Enhances: asreml
