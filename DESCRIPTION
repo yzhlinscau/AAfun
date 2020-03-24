@@ -10,11 +10,8 @@ Depends:
     R (>= 3.3.0)
 Imports:
     amap,
-    agricolae,
     desplot,
     dplyr,
-    ggplot2,
-    grid,
     plyr,
     reshape2
 # Enhances: asreml
