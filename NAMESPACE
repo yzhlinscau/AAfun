@@ -1,5 +1,4 @@
-import(amap,agricolae,desplot,
-ggplot2,grid,reshape2,plyr
+import(amap,desplot,reshape2,plyr
 )
 
 export(asreml.batch)
