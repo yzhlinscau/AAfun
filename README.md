@@ -3,7 +3,7 @@
 # AAfun manual
 ASReml-R Added functions
 
-##### Attension: The version AAfun on github is very old and might not install online. AAfun4 works for ASReml-R V3 or V4.1, anyone can download the new one for windows system from website https://share.weiyun.com/5UhMyII. Please note that I do not pay the fee for ASreml any more, therefore AAfun package will not be updated anymore.
+##### Attension: The version AAfun on github is very old and might not install online.  Please note that I do not pay the fee for ASreml any more, therefore AAfun package will not be updated anymore.
 
 ## About AAfun
 
